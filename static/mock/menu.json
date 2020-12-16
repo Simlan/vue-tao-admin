@@ -1,0 +1,91 @@
+{
+	"code": 1,
+	"data": [{
+      "title": "监控中心",
+      "icon": "\ue6b2",
+      "children": [{
+        "title": "工作台",
+        "path": "console"
+      }]
+    },
+    {
+      "title": "文章管理",
+      "icon": "\ue61e",
+      "children": [{
+          "title": "文章列表",
+          "path": "ArticleList"
+        },
+        {
+          "title": "文章分类",
+          "path": "Classify"
+        },
+        {
+          "title": "文章发布",
+          "path": "ArticlePublish"
+        }
+      ]
+    },
+    {
+      "title": "组件中心",
+      "icon": "\ue61c",
+      "children": [{
+        "title": "组件市场",
+        "path": "Widget"
+      }]
+    },
+    {
+      "title": "消息中心",
+      "icon": "\ue72c",
+      "children": [{
+        "title": "系统消息",
+        "path": "Message"
+      }]
+    },
+    {
+      "title": "用户管理",
+      "icon": "\ue725",
+      "children": [{
+        "title": "账号管理",
+        "path": "Account"
+      }]
+    },
+    {
+      "title": "计划管理",
+      "icon": "\ue651",
+      "children": [{
+        "title": "年度计划",
+        "path": "YearPlan"
+      }]
+    },
+    {
+      "title": "菜单管理",
+      "icon": "\ue662",
+      "children": [{
+        "title": "菜单列表",
+        "path": "Menu"
+      }]
+    },
+    {
+      "title": "异常页面",
+      "icon": "\ue600",
+      "children": [{
+        "title": "403",
+        "path": "403"
+      }, {
+        "title": "404",
+        "path": "404"
+      }, {
+        "title": "500",
+        "path": "500"
+      }]
+    },
+    {
+      "title": "系统设置",
+      "icon": "\ue65d",
+      "children": [{
+        "title": "系统日志",
+        "path": "Log"
+      }]
+    }
+  ]
+}

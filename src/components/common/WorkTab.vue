@@ -1,0 +1,258 @@
+<template>
+  <div class="worktab">
+    <vue-scroll :ops="ops" ref="vs">
+      <ul class="tabs" ref="tabs">
+        <li v-for="(i, index) in worktabs" :key="i.path" 
+          :ref="i.path"
+          :class="{'activ-tab' : i.path === activeTab}"
+          @click="clickTab(index)"
+        >
+          {{i.title}}
+          <i class="el-icon-close" @click.stop="closePage('current', i.path)" v-if="index !== 0"></i>
+        </li>
+      </ul>
+    </vue-scroll>
+
+    <div class="right">
+      <el-dropdown @command="menuHandle">
+        <div class="btn el-icon-arrow-down"/>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item icon="el-icon-arrow-left" command="left">
+            <span style="menu-txt">关闭左侧</span>
+          </el-dropdown-item>
+          <el-dropdown-item icon="el-icon-arrow-right" command="right">
+            <span style="menu-txt">关闭右侧</span>
+          </el-dropdown-item>
+          <el-dropdown-item icon="el-icon-close" command="other">
+            <span style="menu-txt">关闭其它</span>
+          </el-dropdown-item>
+          <el-dropdown-item icon="el-icon-error" command="all">
+            <span style="menu-txt">关闭全部</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+  </div>
+</template>
+
+<script>
+  import { mapState } from 'vuex'
+
+  export default {
+    name: 'Worktab',
+    inject: ["reload"],
+    computed: {
+      ...mapState({
+        worktab: state => state.worktab.worktab,
+      }),
+      worktabs() {
+        return this.worktab.opened
+      }
+    },
+    watch: {
+      'worktab.current' (tab) {
+        this.activeTab = tab.path
+        let el = this.$refs[tab.path]
+        let offset = 0;
+
+        if(el && el.length > 0) {
+          offset = el[0].offset
+        }
+
+        // 进入控制台刷新页面
+        if(tab.path === '/dashboard/console') {
+          this.reload()
+        }
+
+        this.worktabAutoPosition(offset)
+      }
+    },
+    data() {
+      return {
+        activeTab: 'name',
+        selfbutton: "self-button",
+        ops: {  // 滚动条
+          rail: {
+            opacity: '0',
+            background: undefined,
+            size: '0px'
+          },
+          bar: {
+            background: '#999',
+            keepShow: false,
+            size: '0px',
+            minSize: 0
+          },
+          scrollButton: {
+            enable: true,
+            background: '#cecece'
+          },
+          scrollPanel: {
+            easing: 'easeOutQuad',
+            speed: 800
+          },
+          vuescroll: {
+            wheelScrollDuration: 600,
+            wheelDirectionReverse: true
+          }
+        },
+      }
+    },
+    created () {
+      let { path } = this.worktab.current;
+      let currentPath = this.$route.path;
+
+      // 进来不是主页时等list加载后再更新一次current
+      setTimeout(() => {
+        this.activeTab = path
+      }, 500)
+
+      // 第一次进入，打开上一次关闭时候的页面
+      if(path !== currentPath) {
+        this.$router.push({path})
+      }
+    },
+    methods: {
+      // 点击标签
+      clickTab(index) {
+        let path = this.worktabs[1 * index].path
+        if(this.$route.path !== path) {
+          this.$router.push(path)
+        }
+      },
+      menuHandle(type) {
+        this.closePage(type)
+      },
+      /**
+       * 关闭页面
+       * type {current: 当前, other: 其它, all: 所有, left: 左侧所有, right: 右侧所有}
+       */
+      closePage(type, path2) {
+        let path = this.$route.path
+        let router = this.$router
+        let action = ''
+
+        switch(type) {
+          case 'current':
+            action = 'worktabRemove'
+            if(path2) {
+              path = path2
+            }
+            break;
+          case 'other':
+            action = 'worktabRemoveOther'
+            break;
+          case 'left':
+            action = 'worktabRemoveLeft'
+            break;
+          case 'right':
+            action = 'worktabRemoveRight'
+            break;
+          case 'all':
+            action = 'worktabRemoveAll'
+            break;
+        }
+
+        this.$store.dispatch('worktab/' +action, {path, router})
+      },
+      // 工作台选项卡自动定位
+      worktabAutoPosition(offsetLeft) {
+        const vs = this.$refs['vs'];
+        const panel = vs.scrollPanelElm;
+        const panelWidth = panel.clientWidth;
+        const scrollOfLeft = panel.scrollLeft;
+        let x = 0;
+        offsetLeft += 150;
+      
+        // 大于出可视区域
+        if(offsetLeft > panelWidth) {
+          x = offsetLeft;
+        }
+
+        // 小于可视区域
+        if(offsetLeft < scrollOfLeft) {
+          x = offsetLeft - 150
+        }
+
+        vs.scrollTo({x})
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .worktab {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    padding: 6px 15px;
+    box-sizing: border-box;
+
+    .tabs {
+      width: 100px;
+      display: flex;
+      white-space: nowrap;
+
+      li {
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #808695;
+        font-size: 13px;
+        padding: 0 12px;
+        cursor: pointer;
+        border-right: 1px solid #F2F2F2;
+        border-top: 2px solid transparent;
+        transition: all .1s;
+        background: #fff;
+        border-radius: 3px;
+        margin-right: 6px;
+
+        &:hover {
+          color: #515a6e;
+          transition: color .2s;
+        }
+
+        i {
+          color: #808695;
+          padding: 2px;
+          margin-left: 5px;
+          border-radius: 50%;
+          transition: all .2s;
+
+          &:hover {
+            background: #eee;
+          }
+        }
+      }
+
+      .activ-tab {
+        color: $theme-color;
+      }
+    }
+
+    .right {
+      .btn {
+        font-size: 16px;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+        top: 0;
+        border-left: 1px solid #F2F2F2;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0 0 5px #eee;
+
+        &:hover ul{
+          display: inline;
+        }
+      }
+    }
+  }
+</style>
