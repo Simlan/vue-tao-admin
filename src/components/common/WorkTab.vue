@@ -1,20 +1,20 @@
 <template>
   <div class="worktab">
-    <vue-scroll :ops="ops" ref="vs">
+    <vue-scroll :ops="ops" ref="scroll">
       <ul class="tabs" ref="tabs">
         <li v-for="(i, index) in worktabs" :key="i.path" 
           :ref="i.path"
           :class="{'activ-tab' : i.path === activeTab}"
-          @click="clickTab(index)"
+          @click="clickWorktab(index)"
         >
           {{i.title}}
-          <i class="el-icon-close" @click.stop="closePage('current', i.path)" v-if="index !== 0"></i>
+          <i class="el-icon-close" @click.stop="closeWorktab('current', i.path)" v-if="index !== 0"></i>
         </li>
       </ul>
     </vue-scroll>
 
     <div class="right">
-      <el-dropdown @command="menuHandle">
+      <el-dropdown @command="closeWorktab">
         <div class="btn el-icon-arrow-down"/>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item icon="el-icon-arrow-left" command="left">
@@ -69,9 +69,8 @@
     },
     data() {
       return {
-        activeTab: 'name',
-        selfbutton: "self-button",
-        ops: {  // 滚动条
+        activeTab: '',  // 选中的 tab
+        ops: {          // 滚动条
           rail: {
             opacity: '0',
             background: undefined,
@@ -99,54 +98,46 @@
       }
     },
     created () {
-      let { path } = this.worktab.current;
-      let currentPath = this.$route.path;
-
-      // 进来不是主页时等list加载后再更新一次current
-      setTimeout(() => {
-        this.activeTab = path
-      }, 500)
-
-      // 第一次进入，打开上一次关闭时候的页面
-      if(path !== currentPath) {
-        this.$router.push({path})
-      }
+      this.initActiveWorktab()
     },
     methods: {
-      // 点击标签
-      clickTab(index) {
+      // 重载后选项卡默认选中项
+      initActiveWorktab() {
+        setTimeout(() => {
+          this.activeTab = this.$route.path
+        }, 800)
+      },
+      // 点击选项卡
+      clickWorktab(index) {
         let path = this.worktabs[1 * index].path
         if(this.$route.path !== path) {
           this.$router.push(path)
         }
       },
-      menuHandle(type) {
-        this.closePage(type)
-      },
       /**
-       * 关闭页面
-       * type {current: 当前, other: 其它, all: 所有, left: 左侧所有, right: 右侧所有}
+       * 关闭选项卡
+       * type {current: 当前, left: 左侧, right: 右侧, other: 其它, all: 所有}
        */
-      closePage(type, path2) {
-        let path = this.$route.path
+      closeWorktab(type, tabPath) {
+        let { path } = this.$route
         let router = this.$router
         let action = ''
 
         switch(type) {
           case 'current':
             action = 'worktabRemove'
-            if(path2) {
-              path = path2
+            if(tabPath) {
+              path = tabPath
             }
-            break;
-          case 'other':
-            action = 'worktabRemoveOther'
             break;
           case 'left':
             action = 'worktabRemoveLeft'
             break;
           case 'right':
             action = 'worktabRemoveRight'
+            break;
+          case 'other':
+            action = 'worktabRemoveOther'
             break;
           case 'all':
             action = 'worktabRemoveAll'
@@ -157,8 +148,8 @@
       },
       // 工作台选项卡自动定位
       worktabAutoPosition(offsetLeft) {
-        const vs = this.$refs['vs'];
-        const panel = vs.scrollPanelElm;
+        const scroll = this.$refs['scroll'];
+        const panel = scroll.scrollPanelElm;
         const panelWidth = panel.clientWidth;
         const scrollOfLeft = panel.scrollLeft;
         let x = 0;
@@ -174,7 +165,7 @@
           x = offsetLeft - 150
         }
 
-        vs.scrollTo({x})
+        scroll.scrollTo({x})
       }
     }
   }

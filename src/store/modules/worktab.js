@@ -1,6 +1,6 @@
 /**
  * 工作台选项卡
- * 属于：user.js > page
+ * 属于：user.js > worktab
  */
 
 const state = {

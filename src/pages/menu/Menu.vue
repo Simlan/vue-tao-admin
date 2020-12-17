@@ -53,8 +53,7 @@
             <el-button type="text" icon="el-icon-edit" v-allow="'menu/edit'" @click="showModel('menu')">
               编辑
             </el-button>
-            <!--  v-allow="'menu/delete'" -->
-            <el-button type="text" icon="el-icon-delete" class="el-btn-red" @click="deleteMenu()">
+            <el-button type="text" icon="el-icon-delete" class="el-btn-red" v-allow="'menu/delete'" @click="deleteMenu()">
               删除
             </el-button>
           </template>

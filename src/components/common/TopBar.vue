@@ -34,22 +34,20 @@
         </div>
         <div class="lang">
           <el-dropdown @command="changeLanguage">
-            <div>
+            <div class="btn">
               <i class="iconfont">&#xe618;</i>
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="zh_CN">
-                <!-- <i class="menu-icon iconfont">&#xe725;</i> -->
                 <span class="menu-txt">中文</span>
               </el-dropdown-item>
               <el-dropdown-item command="en_US">
-                <!-- <i class="menu-icon iconfont">&#xe678;</i> -->
                 <span class="menu-txt">English</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
-        <div class="gxh" @click="personality">
+        <div class="gxh" @click="openSetting">
           <i class="iconfont">&#xe6b1;</i>
         </div>
       </div>
@@ -103,22 +101,17 @@
       }
     },
     mounted() {
-      this.initState()
+      this.initSetting()
     },
     methods: {
-      initState() {
-        let { menuButton, showRefreshButton, showCrumbs} = this.setting
+      // 初始化个性设置
+      initSetting() {
+        let { menuButton, showRefreshButton, showCrumbs } = this.setting
         this.showMenuButton = menuButton
         this.showRefreshButton = showRefreshButton
         this.showCrumbs = showCrumbs
       },
-      // 左侧菜单展开|缩小
-      visibleMenu() {
-        this.$emit('click')
-      },
-      personality() {
-        this.$emit('personalityShow')
-      },
+      // 退出登录
       loginOut() {
         this.$confirm('您确定退出登录当前账户吗？打开的标签页和个人设置将会保存。', '提示', {
           confirmButtonText: '确定',
@@ -130,21 +123,17 @@
           this.$router.push('/login')
         }).catch(() => {});
       },
-      goPage(path) {
-        if(path == 'loginOut') {
-          this.loginOut()
-          return
-        }
-        this.$router.push({path})
-      },
+      // 全屏
       fullScreen() {
         fullScreen()
         this.isFullScreen = true
       },
+      // 退出全屏
       exitScreen() {
         exitScreen()
         this.isFullScreen = false
       },
+      // 获取多语言
       getLanguage() {
         let {locale} = this.$i18n
         let language = '';
@@ -159,8 +148,25 @@
         }
         // this.language = language
       },
+      // 改变语言
       changeLanguage(lang) {
         this.$i18n.locale = lang
+      },
+      // 左侧菜单展开|缩小
+      visibleMenu() {
+        this.$emit('click')
+      },
+      // 打开个性化设置
+      openSetting() {
+        this.$emit('personalityShow')
+      },
+      // 跳转页面
+      goPage(path) {
+        if(path == 'loginOut') {
+          this.loginOut()
+          return
+        }
+        this.$router.push({path})
       }
     }
   }
@@ -266,8 +272,12 @@
           height: 60px;
           line-height: 60px;
           display: flex;
-          padding: 0 15px;
+          text-align: center;
           transition: background-color .3s;
+
+          .btn {
+            width: 45px;
+          }
 
           &:hover {
             background: $hover-color;

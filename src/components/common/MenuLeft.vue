@@ -54,11 +54,11 @@
 </template>
 
 <script>
-  import menuList from '@/config/menu'
   import setting from '@/config/setting'
   import axios from 'axios'
   import { flatten } from '@/utils/utils'
   import { mapState } from 'vuex'
+  import { allowRouters } from '@/router/index.js'
 
   export default {
     name: "MenuLeft",
@@ -66,7 +66,8 @@
     computed: {
       ...mapState({
         worktab: state => state.worktab.worktab,
-        setting: state => state.setting.setting
+        setting: state => state.setting.setting,
+        menu: state => state.menu
       }),
       routerPath() {
         let { current } = this.worktab
@@ -78,15 +79,20 @@
     watch: { 
       'setting.theme'(theme) {
         this.setTheme(theme)
+        console.log('setting.theme')
       },
       'setting.uniqueOpened' (uniqueOpened) {
         this.uniqueOpened = uniqueOpened
+      },
+      'menu.menuList' (list) {
+        this.menuList = list
       }
     },
     data() {
       return {
+        status: '',
         systemName: setting.systemName, // 系统名称
-        menuList: menuList,             // 菜单数据
+        menuList: [],             // 菜单数据
         collapse: false,                // 是否水平折叠收起菜单
         theme: {},                      // 主题
         uniqueOpened: '',               // 是否只保持一个子菜单的展开
@@ -95,9 +101,13 @@
     mounted() {
       this.initMenuTheme()
       this.initUserSetting()
-      // this.getMenuList()
+      this.getMenuList()
     },
     methods: {
+      // 获取菜单列表|权限列表
+      getMenuList() {
+        this.menuList = this.$store.state.menu.menuList
+      },
       // 初始化主题
       initMenuTheme() {
         let sys = JSON.parse(localStorage.getItem('sys'))
@@ -120,14 +130,6 @@
       // 初始化用户设置
       initUserSetting() {
         this.uniqueOpened = this.setting.uniqueOpened
-      },
-      // mock本地菜单列表数据
-      getMenuList() {
-        axios.get('/static/mock/menu.json').then((res) => {
-          if(res.data.code === 1) {
-            this.menuList = res.data.data
-          }
-        })
       },
       // 菜单展开 | 收缩
       visibleMenu() {

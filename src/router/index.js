@@ -4,7 +4,6 @@ import Router from 'vue-router'
 import Home from '@/pages/home/Home.vue'
 import Console from '@/pages/dashboard/Console'
 import { isLoginFun } from '@/utils/utils'
-import menuList from '@/config/menu'
 
 Vue.use(Router)
 
@@ -64,6 +63,22 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/loading',
+    component: Home,
+    meta: {
+      title: '加载'
+    },
+    children: [
+      {
+        path: 'loading',
+        component: () => import('@/pages/loading/Loading'),
+        meta: {
+          title: 'loading'
+        }
+      },
+    ]
   }
 ]
 
@@ -72,7 +87,7 @@ const router = new Router({
 })
 
 // 需要权限的路由
-const allowRouters = [
+export const allowRouters = [
   {
     path: '/article',
     component: Home,
@@ -216,7 +231,7 @@ const allowRouters = [
   }
 ]
 
-let isLoadPermission = false
+let isLoadPermission = false 
 
 router.beforeEach((to, from, next) => {
   let { meta, matched } = to
@@ -229,23 +244,38 @@ router.beforeEach((to, from, next) => {
     next('/login')
     return
   }else {
-    if(!isLoadPermission) {
-      // 匹配路由，将匹配成功的路由添加到路由表
-      routerMatch(menuList, allowRouters).then(res => {
-        router.addRoutes(res[0]);
-      })
-      isLoadPermission = true
-    }else {
-      if(!matched.length && page404 !== from.path) { // 打开的页面不存在
-        router.push(page404)
-        return
-      }
+    // if(!matched.length && page404 !== from.path) { // 打开的页面不存在
+    //   router.push(page404)
+    //   return
+    // }
+    // if(!isLoadPermission) {
+    //   // 匹配路由，将匹配成功的路由添加到路由表
+    //   routerMatch(menuList, allowRouters).then(res => {
+    //     console.log(res[0])
+    //     router.addRoutes(res[0]);
+    //   })
+    //   console.log(routes)
+    //   isLoadPermission = true
+    // }else {
+    //   if(!matched.length && page404 !== from.path) { // 打开的页面不存在
+    //     router.push(page404)
+    //     return
+    //   }
+    // }
+
+    // next()
+
+    if(!matched.length && page404 !== from.path) { // 打开的页面不存在
+      // router.push(page404)
+      // router.push('/loading/loading')
+      return
     }
+
     next()
   }
-  
+
   // 是不是标签页
-  if (labelPage) {
+  if (labelPage || to.path === '/loading/loading') {
     return
   }
 
