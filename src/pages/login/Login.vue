@@ -132,6 +132,10 @@
       height: 100%;
       position: relative;
 
+      .header {
+        display: none;
+      }
+
       .login-wrap{
         width: 440px;
         height: 550px;

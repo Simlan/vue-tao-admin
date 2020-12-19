@@ -112,20 +112,28 @@
     methods: {
       // 初始化用户主题设置
       initThemeSetting() {
+        let { defaultTheme } = setting
+        let t = defaultTheme
         let sys = JSON.parse(localStorage.getItem('sys'))
-        let defaultTheme = this.themeList[0].theme
 
         if(sys) {
           let { theme } = sys.user.setting
-
-          if(!theme) {
-            this.setUpTheme(defaultTheme, 'init')
+          if(theme) {
+            t = theme
           }else {
-            this.currentTheme = theme
+            t = defaultTheme
           }
-        }else {
-          this.setUpTheme(defaultTheme, 'init')
         }
+
+        this.setUpTheme(t, 'init')
+      },
+      // 设置主题
+      setUpTheme(theme, type) {
+        if(type === 'switchTheme') {
+          this.$emit('click')
+        }
+        this.currentTheme = theme
+        this.$store.dispatch('setting/setUpTheme', theme)
       },
       // 初始化用户设置
       initUserSetting() {
@@ -136,13 +144,6 @@
         this.autoClose = autoClose
         this.showRefreshButton = showRefreshButton
         this.showCrumbs = showCrumbs
-      },
-      // 设置主题
-      setUpTheme(theme, type) {
-        if(type === 'switchTheme') {
-          this.$emit('click')
-        }
-        this.$store.dispatch('setting/setUpTheme', theme)
       },
       // 是否开启手风琴模式
       setLeftMenuUniqueOpened() {

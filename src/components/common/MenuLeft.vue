@@ -78,9 +78,11 @@
       }
     },
     watch: { 
-      'setting.theme'(theme) {
-        this.setTheme(theme)
-        console.log('setting.theme')
+      'setting.theme': {
+        handler(theme) {
+          this.getTheme(theme)
+        },
+        immediate: true
       },
       'setting.uniqueOpened' (uniqueOpened) {
         this.uniqueOpened = uniqueOpened
@@ -100,7 +102,6 @@
       }
     },
     mounted() {
-      this.initMenuTheme()
       this.initUserSetting()
       this.getMenuList()
     },
@@ -109,24 +110,14 @@
       getMenuList() {
         this.menuList = this.$store.state.menu.menuList
       },
-      // 初始化主题
-      initMenuTheme() {
-        let sys = JSON.parse(localStorage.getItem('sys'))
-
-        if(sys) {
-          let { theme } = sys.user.setting
-
-          if(theme) {
-            this.setTheme(theme)
-          }
+      // 获取主题
+      getTheme(theme) {
+        if(theme) {
+          let t = setting.themeList.filter((item) => {
+            return item.theme === theme
+          })
+          this.theme = t[0]
         }
-      },
-      // 设置主题
-      setTheme(theme) {
-        let t = setting.themeList.filter((item) => {
-          return item.theme === theme
-        })
-        this.theme = t[0]
       },
       // 初始化用户设置
       initUserSetting() {
