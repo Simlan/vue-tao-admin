@@ -30,16 +30,6 @@
       ]
     },
     {
-      "title": "组件中心",
-      "icon": "\ue61c",
-      "children": [
-        {
-          "title": "组件市场",
-          "path": "/widget/widget"
-        }
-      ]
-    },
-    {
       "title": "消息中心",
       "icon": "\ue72c",
       "children": [
@@ -55,7 +45,8 @@
       "children": [
         {
           "title": "个人中心",
-          "path": "/user/user"
+          "path": "/user/user",
+          "noMenu": true
         },
         {
           "title": "账号管理",
@@ -129,6 +120,10 @@
       "title": "系统设置",
       "icon": "\ue65d",
       "children": [
+        {
+          "title": "系统设置",
+          "path": "/system/setting"
+        },
         {
           "title": "系统日志",
           "path": "/system/log"

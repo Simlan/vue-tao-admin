@@ -164,42 +164,23 @@ export default {
     margin: auto;
   }
 
-  @media only screen and (max-width: 1600px)  {
-    svg {
-      width: 180px !important;
-      height: 180px !important;
-    }
-
-    .detailShow {
-
-      i {
-        font-size: 17px; 
-      }
-
-      p {
-        font-size: 33px !important;
-      }
-    }
-
-    .bottom-title {
-      bottom: 10px;
+  @media only screen and (max-width: $device-ipad) { 
+    .card {
+      width: 100%;
+      height: 370px;
+      margin-top: 15px;
     }
   }
 
-  @media only screen and (max-width: 1400px)  {
-    svg {
-      width: 150px !important;
-      height: 150px !important;
-    }
+  @media only screen and (max-width: $device-phone) { 
+    .card {
+      width: 100%;
+      height: 300px;
+      margin-top: 15px;
 
-    .detailShow {
-
-      i {
-        font-size: 15px; 
-      }
-
-      p {
-        font-size: 30px !important;
+      .progress {
+        width: 180px;
+        height: 180px;
       }
     }
   }

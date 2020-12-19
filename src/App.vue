@@ -11,10 +11,11 @@
   export default {
     name: 'App',
     created() {
+      this.noRebound()
       this.getMenuList()
     },
     methods: {
-      // 获取菜单列表(权限列表)
+      // 获取菜单列表
       getMenuList() {
         let isPro = location.href.indexOf('tao_admin')
         let url = '/static/mock/menu.json'
@@ -25,24 +26,22 @@
 
         axios.get(url).then((res) => {
           if(res.data.code === 200) {
-            this.$store.dispatch('menu/setMenuList', res.data.data)
-
-            this.routerMatch(res.data.data, allowRouters).then(res => {
-              this.$router.addRoutes(res[0]);
-              let { path } = this.$route
-              let localPath = JSON.parse(localStorage.getItem('router'))
-
-              if(path !== localPath) {
-                this.$router.push(localPath)
-              }
+            let  { data } = res.data
+            
+            this.routerMatch(data, allowRouters).then(routes => {
+              this.$store.dispatch('menu/setMenuList', data)
+              this.$router.options.routes = Array.from(
+                new Set(this.$router.options.routes.concat(routes))
+              )
+              this.$router.addRoutes(routes) // 动态添加路由
             })
           }
         })
       },
       /**
        * 根据权限匹配路由并返回
-       * @param {array} permission 后台返回的权限列表（菜单列表）
-       * @param {array} allowRouters 需要权限的路由表
+       * @param {array} permission    后台返回的权限列表（菜单列表）
+       * @param {array} allowRouters  需要权限的路由表
        */
       routerMatch(permission, allowRouters) {
         return new Promise((resolve) => {
@@ -68,18 +67,24 @@
                       routers.push(s);
                     }
                   })
-                }
-                if (path && s.path === path) {
-                  s.meta.permission = item.permission
-                  routers.push(s);
+                }else {
+                  if (path && s.path === path) {
+                    s.meta.permission = item.permission
+                    routers.push(s);
+                  }
                 }
               })
             })
           }
-
           createRouter(permission)
-          resolve([routers])
+          resolve(Array.from(new Set(routers)))
         })
+      },
+      // 阻止下拉滑动回弹
+      noRebound() {
+        document.body.addEventListener('touchmove', function (e) {
+          e.preventDefault()
+        }, {passive: false})
       }
     }
   }

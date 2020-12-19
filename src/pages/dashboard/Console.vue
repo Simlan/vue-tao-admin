@@ -10,7 +10,13 @@
     <div class="row row2">
       <line-chart/>
       <pie-chart/>
-      <round-progress color="#45A1FC" iconBg="#CAE2FA" title="本月目标" title2="本月待办事项：20" styles="flex: 1" />
+      <round-progress 
+        color="#45A1FC" 
+        iconBg="#CAE2FA" 
+        title="本月目标" 
+        title2="本月待办事项：20" 
+        styles="flex: 1"
+      />
     </div>
   </div>
 </template>
@@ -34,15 +40,8 @@
     },
     data () {
       return {
-        theme: true
+        
       }
-    },
-    inject:['reload'],
-    mounted() {
-      
-    },
-    methods: {
-      
     }
   }
 </script>
@@ -95,6 +94,20 @@
 
     .row1, .row2 {
       height: 410px;
+    }
+  }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .console {
+
+      .row {
+        display: block;
+        height: auto !important;
+      }
+
+      .row1 {
+        margin-top: 0;
+      }
     }
   }
 </style>

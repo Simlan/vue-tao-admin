@@ -5,7 +5,7 @@
         <li v-for="(i, index) in worktabs" :key="i.path" 
           :ref="i.path"
           :class="{'activ-tab' : i.path === activeTab}"
-          @click="clickWorktab(index)"
+          @click="clickWorktab(i.path)"
         >
           {{i.title}}
           <i class="el-icon-close" @click.stop="closeWorktab('current', i.path)" v-if="index !== 0"></i>
@@ -44,6 +44,7 @@
     computed: {
       ...mapState({
         worktab: state => state.worktab.worktab,
+        menu: state => state.menu
       }),
       worktabs() {
         return this.worktab.opened
@@ -65,6 +66,12 @@
         }
 
         this.worktabAutoPosition(offset)
+      },
+      'menu.menuList': {
+        handler(list) {
+          this.getCurrentUserAllowRouters()
+        },
+        immediate: true
       }
     },
     data() {
@@ -95,12 +102,22 @@
             wheelDirectionReverse: true
           }
         },
+        allowPath: [], // 存储当前用户可访问的路由
       }
     },
     created () {
       this.initActiveWorktab()
     },
     methods: {
+      // 获取当前用户可访问的路由
+      getCurrentUserAllowRouters() {
+        let { menuList } = this.menu
+        let { routes } = this.$router.options
+
+        this.routerMatch(menuList, routes).then(res => {
+          this.allowPath = res
+        })
+      },
       // 重载后选项卡默认选中项
       initActiveWorktab() {
         setTimeout(() => {
@@ -108,11 +125,55 @@
         }, 800)
       },
       // 点击选项卡
-      clickWorktab(index) {
-        let path = this.worktabs[1 * index].path
+      clickWorktab(path) {
+        let allow = this.allowPath.indexOf(path)
+
         if(this.$route.path !== path) {
-          this.$router.push(path)
+          if(allow !== -1) {
+            this.$router.push(path)
+          }else { // 无权限
+            let page403 = '/exception/403'
+            if(this.$route.path !== page403) {
+              this.$router.push(page403)
+            }
+          }
         }
+      },
+      /**
+       * 根据权限匹配路由并返回
+       * @param {array} permission 后台返回的权限列表（菜单列表）
+       * @param {array} allowRouters 需要权限的路由表
+       */
+      routerMatch(permission, allowRouters) {
+        return new Promise((resolve) => {
+          const paths = []
+          function createRouter(permission) {
+            permission.forEach((item) => {
+              let { path } = item
+              let pathArr = path && path.split('/')
+
+              if(pathArr) {
+                path = pathArr[pathArr.length-1]
+              }
+
+              if (item.children && item.children.length) {
+                createRouter(item.children)
+              }
+
+              allowRouters.find((s) => {
+                if (s.children) {
+                  s.children.find((y) => {
+                    if (y.path === path) {
+                      paths.push(s.path + '/' + y.path)
+                    }
+                  })
+                }
+              })
+            })
+          }
+          createRouter(permission)
+          resolve(paths)
+        })
       },
       /**
        * 关闭选项卡
@@ -244,6 +305,12 @@
           display: inline;
         }
       }
+    }
+  }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .worktab {
+      padding: 6px 10px;
     }
   }
 </style>

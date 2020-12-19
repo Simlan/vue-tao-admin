@@ -126,4 +126,20 @@
     }
   }
   
+  @media only screen and (max-width: $device-ipad) { 
+    .line-box {
+      width: 100%;
+      height: 370px;
+
+      .line-chart {
+        height: calc(100% - 80px);
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        overflow: hidden;
+      }
+    }
+  }
 </style>

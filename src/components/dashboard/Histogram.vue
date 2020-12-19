@@ -142,24 +142,8 @@ export default {
           { '日期': '11月', '访问用户': 1723},
           { '日期': '12月', '访问用户': 1723},
         ]
-      },
-      types: [
-        {
-          value: '1',
-          label: '选项1'
-        }, {
-          value: '2',
-          label: '选项2'
-        }
-      ],
-      type: '',
+      }
     };
-  },
-  mounted() {
-    
-  },
-  methods: {
-    
   }
 };
 </script>
@@ -180,4 +164,15 @@ export default {
     }
   }
   
+  @media only screen and (max-width: $device-ipad) { 
+    .his {
+      width: 100%;
+      height: 370px;
+      margin-right: 0px !important;
+
+      .histogram {
+        width: 100%;
+      }
+    }
+  }
 </style>

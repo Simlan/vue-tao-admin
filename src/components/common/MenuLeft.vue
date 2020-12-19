@@ -43,8 +43,9 @@
             </el-menu-item>
           </el-submenu>
 
-          <el-menu-item :index="item2.path" v-else @click="goPage(item2.path, item2.params, item2)">
-            <!-- <i class="iconfont">&#xe606;</i> -->
+          <el-menu-item :index="item2.path" v-else @click="goPage(item2.path, item2.params, item2)"
+            v-show="!item2.noMenu"
+          >
             <span slot="title">{{item2.title}}</span>
           </el-menu-item>
         </div>
@@ -92,7 +93,7 @@
       return {
         status: '',
         systemName: setting.systemName, // 系统名称
-        menuList: [],             // 菜单数据
+        menuList: [],                   // 菜单数据
         collapse: false,                // 是否水平折叠收起菜单
         theme: {},                      // 主题
         uniqueOpened: '',               // 是否只保持一个子菜单的展开
@@ -293,6 +294,12 @@
 
     .el-menu:not(.el-menu--collapse) {
       width: $menu-left-open-width;
+    }
+  }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .menu {
+      display: none;
     }
   }
 </style>

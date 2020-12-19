@@ -1,20 +1,74 @@
 <template>
   <div class='page-content'>
-    <el-row :gutter="20">
-      <el-col :span="4">
-        <el-input placeholder="请输入用户名或者昵称搜索"></el-input>
-      </el-col>
-      <el-button>搜索</el-button>
-      <el-button @click="showDialog('add')">新增用户</el-button>
-    </el-row>
-    <tao-table :data="userList" style="margin-top: 15px">
+    <table-bar :showTop="false">
+      <div slot="top">
+        <el-form label-width="70px">
+          <el-row :gutter="20">
+            <el-col :span="6">
+              <el-form-item label="用户名：">
+                <el-input placeholder="用户名"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="手机号：">
+                <el-input placeholder="手机号"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="邮箱：">
+                <el-input placeholder="邮箱"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="账号：">
+                <el-input placeholder="账号"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20">
+            <el-col :span="6">
+              <el-form-item label="用户ID：">
+                <el-input placeholder="用户ID"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="性别：">
+                <el-select v-model="value" clearable placeholder="请选择" style="width: 100%">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="用户ID：">
+                <el-input placeholder="用户ID"></el-input>
+              </el-form-item>
+            </el-col>
+            
+            <el-row :span="6" style="float: right; margin-right: 10px;">
+              <el-button type="primary">搜索</el-button>
+              <el-button>重置</el-button>
+            </el-row>
+          </el-row>
+        </el-form>
+      </div>
+      <div slot="bottom">
+        <el-button type="primary" plain @click="showDialog('add')">新增用户</el-button>
+      </div>
+    </table-bar>
+    
+    <tao-table :data="userList">
       <el-table-column label="头像" prop="avatar">
         <template slot-scope="scope">
           <img class="avatar" :src="scope.row.avatar"/>
         </template>
       </el-table-column>
       <el-table-column label="用户名" prop="username"/>
-      <el-table-column label="电话" prop="mobile"/>
+      <el-table-column label="手机号" prop="mobile"/>
       <el-table-column label="邮箱" prop="email"/>
       <el-table-column label="性别" prop="sex">
         <template slot-scope="scope">
@@ -93,6 +147,14 @@
           dep: '',
           status: true
         },
+        options: [{
+          value: '1',
+          label: '男'
+        }, {
+          value: '2',
+          label: '女'
+        }],
+        value: '',
         userList: [
           {
             username: '中小鱼',

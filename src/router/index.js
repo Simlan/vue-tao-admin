@@ -32,7 +32,7 @@ const routes = [
     component: () => import('@/pages/login/Login'),
     meta: {
       title: '登录',
-      labelPage: true
+      newPage: true
     }
   },{
     path: '/exception',
@@ -62,22 +62,6 @@ const routes = [
           title: '500'
         }
       }
-    ]
-  },
-  {
-    path: '/loading',
-    component: Home,
-    meta: {
-      title: '加载'
-    },
-    children: [
-      {
-        path: 'loading',
-        component: () => import('@/pages/loading/Loading'),
-        meta: {
-          title: 'loading'
-        }
-      },
     ]
   }
 ]
@@ -155,6 +139,13 @@ export const allowRouters = [
     },
     children: [
       {
+        path: 'setting',
+        component: () => import('@/pages/system/Setting'),
+        meta: {
+          title: '系统设置'
+        }
+      },
+      {
         path: 'log',
         component: () => import('@/pages/system/Log'),
         meta: {
@@ -231,12 +222,9 @@ export const allowRouters = [
   }
 ]
 
-let isLoadPermission = false 
-
 router.beforeEach((to, from, next) => {
   let { meta, matched } = to
-  let { title, labelPage, keepAlive } = meta
-  let page404 = '/exception/404'
+  let { title, newPage, keepAlive } = meta
   let isLogin = isLoginFun()
   to.params.keepAlive = keepAlive
 
@@ -244,38 +232,20 @@ router.beforeEach((to, from, next) => {
     next('/login')
     return
   }else {
-    // if(!matched.length && page404 !== from.path) { // 打开的页面不存在
-    //   router.push(page404)
-    //   return
-    // }
-    // if(!isLoadPermission) {
-    //   // 匹配路由，将匹配成功的路由添加到路由表
-    //   routerMatch(menuList, allowRouters).then(res => {
-    //     console.log(res[0])
-    //     router.addRoutes(res[0]);
-    //   })
-    //   console.log(routes)
-    //   isLoadPermission = true
-    // }else {
-    //   if(!matched.length && page404 !== from.path) { // 打开的页面不存在
-    //     router.push(page404)
-    //     return
-    //   }
-    // }
+    let { menuList } = store.state.menu
 
-    // next()
-
-    if(!matched.length && page404 !== from.path) { // 打开的页面不存在
-      // router.push(page404)
-      // router.push('/loading/loading')
-      return
+    if(menuList.length > 0) { // 菜单数据加载成功
+      if(!matched.length) {   // 打开的页面不存在
+        router.push('/exception/404')
+        return
+      }
     }
 
     next()
   }
 
-  // 是不是标签页
-  if (labelPage || to.path === '/loading/loading') {
+  // 不是标签页
+  if (newPage) {
     return
   }
 

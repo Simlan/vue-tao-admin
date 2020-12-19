@@ -8,6 +8,12 @@
       <img class="left-img" src="@img/lf_icon.svg"/>
     </div>
     <div class="right-wrap">
+      <div class="header">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#iconzhaopian-copy"></use>
+        </svg>
+        <h1>Tao Admin</h1>
+      </div>
       <div class="login-wrap">
         <div class="form">
           <h3>登 录</h3>
@@ -167,6 +173,49 @@
             border: 0;
             color: #fff;
             background: #4E83FD;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: $device-ipad-pro) { 
+    .login {
+      width: 100%;
+      height: 100vh;
+
+      .left-wrap {
+        display: none;
+      }
+        
+      .right-wrap {
+        width: 100%;
+
+        .header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 20vh;
+
+          h1 {
+            font-weight: 500;
+            margin-left: 15px;
+          }
+        }
+
+        .login-wrap{
+          width: 100%;
+          height: auto;
+          border-radius: 0;
+          position: relative;
+          box-shadow: none;
+
+          .form {
+            padding: 0px 30px;
+            
+            h3 {
+              display: none;
+            }
           }
         }
       }

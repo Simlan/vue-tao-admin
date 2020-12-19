@@ -10,13 +10,13 @@
     <div class="table">
       <el-table
         lazy
-        :data="tableData1"
+        :data="tableData"
         style="width: 100%"
         row-key="id"
         :load="load"
         size="medium"
         :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-        :header-cell-style="{ color: '#666', fontWeight: 'bold' }"
+        :header-cell-style="{ color: '#666' }"
       >
         <el-table-column prop="name" label="菜单名称"/>
         <el-table-column prop="icon" label="图标"/>
@@ -171,7 +171,7 @@
   export default {
     data() {
       return {
-        tableData1: [
+        tableData: [
           {
             id: 1,
             name: '系统管理',

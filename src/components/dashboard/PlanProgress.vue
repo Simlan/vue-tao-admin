@@ -137,4 +137,12 @@
       height: calc(100% - 30px);
     }
   }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .pro {
+      width: 100% !important;
+      margin-top: 15px;
+      padding-bottom: 30px; 
+    }
+  }
 </style>

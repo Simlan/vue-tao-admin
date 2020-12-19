@@ -62,4 +62,12 @@
       overflow: hidden;
     }
   }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .pie {
+      width: 100%;
+      height: 370px;
+      margin-top: 15px;
+    }
+  }
 </style>

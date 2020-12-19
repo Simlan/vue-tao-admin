@@ -307,4 +307,10 @@
       }
     }
   }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .topbar {
+      width: 100% !important;
+    }
+  }
 </style>

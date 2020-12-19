@@ -4,7 +4,7 @@
       :data="data || tableData"
       :height="height"
       :row-class-name="tableRowClassName"
-      :header-cell-style="{ background: '#F8F8F9', color: '#666', fontWeight: 'bold' }"
+      :header-cell-style="{ background: '#F8F8F9', color: '#666' }"
       :fit="true"
       :size="size"
       :style="{ marginBottom: Bottom + 'px' }"

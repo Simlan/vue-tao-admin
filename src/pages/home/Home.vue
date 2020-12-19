@@ -63,13 +63,6 @@
         let _self = this
         window.addEventListener('beforeunload', e => {
           _self.$store.dispatch('user/storeStorage')
-
-          let { path } = _self.$route
-
-          if(path === '/login') {
-            path = '/dashboard/console'
-          }
-          localStorage.setItem('router', JSON.stringify(path))
         })
       },
       // 刷新页面
@@ -135,6 +128,19 @@
           font-size: 12px;
           color: #eee;
         }
+      }
+    }
+  }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .frame {
+      width: 100%;
+      padding-left: 0 !important;
+      min-height: 100vh;
+      overflow-y: scroll;
+
+      .container {
+        width: calc(100% - 20px);
       }
     }
   }

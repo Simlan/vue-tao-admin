@@ -170,7 +170,7 @@
     }
   }
 
-  @media only screen and (max-width: 1600px)  {
+  @media only screen and (max-width: $device-notebook)  {
     .card {
       padding-top: 0 !important;
 
@@ -180,6 +180,46 @@
 
       .number, .des {
         right: 15px !important;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .card {
+
+      ul {
+        width: calc(100% + 15px);
+        margin-left: -15px;
+        display: flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+
+        li {
+          width: calc(33.333% - 15px);
+          height: 120px;
+          line-height: 120px;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: $device-phone) { 
+    .card {
+
+      ul {
+        width: calc(100% + 15px);
+        margin-left: -15px;
+        display: flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+
+        li {
+          width: 100%;
+          height: 100px;
+          line-height: 100px;
+          margin-bottom: 10px;
+        }
       }
     }
   }
