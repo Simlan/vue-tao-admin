@@ -73,6 +73,7 @@
     .row {
       display: flex;
       margin-top: 15px;
+      background: transparent !important;
 
       > div {
         margin-right: 15px;

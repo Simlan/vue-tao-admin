@@ -68,7 +68,7 @@
           },
           boundaryGap: false,
           axisLine: {       // 坐标轴 轴线
-            show: true,  // 是否显示
+            show: false,  // 是否显示
             lineStyle: {
               color: '#EBEBEB',
               width: 1,

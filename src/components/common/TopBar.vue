@@ -182,6 +182,7 @@
     z-index: 1000;
     transition: all .3s ease-in-out;
     background: $default-background;
+    background: transparent !important;
 
     .menu {
       height: 60px;

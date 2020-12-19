@@ -7,12 +7,19 @@
   >
     <div class="drawer-con">
       <p class="title">主题风格设置</p>
-
       <div class="theme-wrap">
         <div v-for="item in themeList" :key="item.theme" @click="setUpTheme(item.theme, 'switchTheme')">
           <div class="top" :style="{ background: item.tabbarBackground }" ></div>
           <div class="left" :style="{ background: item.menuLeftBc }"></div>
           <div class="active" v-if="item.theme === currentTheme"></div>
+        </div>
+      </div>
+
+      <p class="title" style="margin-top: 35px">夜间模式</p>
+      <div class="theme-wrap">
+        <div v-for="item in dayThemeList" :key="item.theme" @click="setDarkTheme(item.theme)"
+          :style="{background: item.color}"
+        >
         </div>
       </div>
 
@@ -97,6 +104,16 @@
     data() {
       return {
         themeList: setting.themeList,
+        dayThemeList: [
+          {
+            theme: 'white',
+            color: '#fff'
+          },
+          {
+            theme: 'dark',
+            color: '#22252A'
+          }
+        ],
         currentTheme: '',
         uniqueOpened: '',
         showMenuButton: '',
@@ -134,6 +151,14 @@
         }
         this.currentTheme = theme
         this.$store.dispatch('setting/setUpTheme', theme)
+      },
+      setDarkTheme(theme) {
+        if(theme === 'dark') {
+          document.getElementsByTagName("body")[0].setAttribute("class","dark-body");
+        }else {
+          document.getElementsByTagName("body")[0].setAttribute("class","");
+        }
+        this.$emit('click')
       },
       // 初始化用户设置
       initUserSetting() {

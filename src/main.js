@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import 'default-passive-events'
 import "@css/reset.scss"            // 重置html元素样式
+import '@css/dark.scss'             // 暗黑主题
 import "@/assets/icon/iconfont.css" // 图标库
 import "@/assets/icon/iconfont.js"  // 彩色图标
 import ElementUI from 'element-ui'  // 组件库

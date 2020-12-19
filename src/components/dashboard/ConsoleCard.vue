@@ -98,6 +98,8 @@
 
 <style lang="scss" scoped>
   .card {
+    overflow: hidden;
+    background: transparent !important;
 
     ul {
       width: calc(100% + 15px);
@@ -105,6 +107,7 @@
       display: flex;
       flex-wrap: wrap;
       box-sizing: border-box;
+      background: transparent !important;
 
       li {
         width: calc(20% - 15px);

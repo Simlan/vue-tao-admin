@@ -247,6 +247,7 @@
       width: 100px;
       display: flex;
       white-space: nowrap;
+      background: transparent !important;
 
       li {
         height: 30px;
@@ -256,7 +257,6 @@
         font-size: 13px;
         padding: 0 12px;
         cursor: pointer;
-        border-right: 1px solid #F2F2F2;
         border-top: 2px solid transparent;
         transition: all .1s;
         background: #fff;
