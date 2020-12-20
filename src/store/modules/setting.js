@@ -10,6 +10,7 @@ const state = {
     showRefreshButton: true,  // 是否显示页面刷新按钮
     showCrumbs: true,         // 是否显示全局面包屑
     autoClose: false,         // 设置后是否自动关闭窗口
+    themeModel: '',           // 主题模式
   }
 }
 
@@ -48,6 +49,10 @@ const mutations = {
   // 是否显示面包屑导航
   setLeftMenuCrumbs(state, e) {
     state.setting.showCrumbs = e.show
+  },
+  // 主题模式
+  setThemeModel(state, theme) {
+    state.setting.themeModel = theme
   }
 }
 
@@ -72,6 +77,9 @@ const actions = {
   },
   setLeftMenuCrumbs({commit}, e) {
     commit('setLeftMenuCrumbs', e)
+  },
+  setThemeModel({commit}, e) {
+    commit('setThemeModel', e)
   }
 }
 

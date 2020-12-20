@@ -11,6 +11,7 @@ const setting = {
     iv: "ABCDEF1234123412"
   },
   defaultTheme: 'dark', // 默认主题
+  themeModel: 'auto',  // 主题模式
   // 菜单主题（选中颜色、hover颜色前往MenuLeft组件修改） 
   themeList: [
     {

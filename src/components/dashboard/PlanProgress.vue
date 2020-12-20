@@ -26,77 +26,77 @@
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 10,
-            color: '#19BE6B'
+            color: '#19BE6B !important'
           },
           {
             title: '学习Flutter',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 100,
-            color: '#2D8CF0'
+            color: '#2D8CF0 !important'
           },
           {
             title: '六块腹肌',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 10,
-            color: '#E6A23C'
+            color: '#E6A23C !important'
           },
           {
             title: '网站重构',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 100,
-            color: '#FF9C80'
+            color: '#FF9C80 !important'
           },
           {
             title: 'Golang',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 100,
-            color: '#B7CBE2'
+            color: '#B7CBE2 !important'
           },
           {
             title: 'TypeScript',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 70,
-            color: '#909399'
+            color: '#909399 !important'
           },
           {
             title: 'HTTP',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 10,
-            color: '#9BB4F3'
+            color: '#9BB4F3 !important'
           },
           {
             title: '设计模式',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 30,
-            color: '#F2B985'
+            color: '#F2B985 !important'
           },
           {
             title: '算法',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 5,
-            color: '#F5B7CE'
+            color: '#F5B7CE !important'
           },
           {
             title: 'Node.js',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 10,
-            color: '#7CC6DD'
+            color: '#7CC6DD !important'
           },
           {
             title: 'Vue深入学习',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 30,
-            color: '#F06B7C'
+            color: '#F06B7C !important'
           },
         ],
       }

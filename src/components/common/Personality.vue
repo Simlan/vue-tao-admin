@@ -8,18 +8,21 @@
     <div class="drawer-con">
       <p class="title">主题风格设置</p>
       <div class="theme-wrap">
-        <div v-for="item in themeList" :key="item.theme" @click="setUpTheme(item.theme, 'switchTheme')">
-          <div class="top" :style="{ background: item.tabbarBackground }" ></div>
-          <div class="left" :style="{ background: item.menuLeftBc }"></div>
+        <div v-for="item in themeList" :key="item.theme" @click="setUpTheme(item.theme)">
+          <div class="top" :style="{ background: item.tabbarBackground + '!important' }" ></div>
+          <div class="left" :style="{ background: item.menuLeftBc + '!important' }"></div>
           <div class="active" v-if="item.theme === currentTheme"></div>
         </div>
       </div>
 
-      <p class="title" style="margin-top: 35px">夜间模式</p>
+      <p class="title" style="margin-top: 35px">外观</p>
       <div class="theme-wrap">
         <div v-for="item in dayThemeList" :key="item.theme" @click="setDarkTheme(item.theme)"
-          :style="{background: item.color}"
+          :style="{background: item.color[0] + '!important'}"
         >
+          <div style="width: 50%; height: 100%; float: right" 
+            :style="{background: item.color[1] + '!important'}"></div>
+          <div class="active" v-if="item.theme === currentView"></div>
         </div>
       </div>
 
@@ -107,11 +110,18 @@
         dayThemeList: [
           {
             theme: 'white',
-            color: '#fff'
+            color: ['#fff', '#fff'],
+            name: '浅色'
           },
           {
             theme: 'dark',
-            color: '#22252A'
+            color: ['#22252A'],
+            name: '深色'
+          },
+          {
+            theme: 'auto',
+            color: ['#fff', '#22252A'],
+            name: '自动'
           }
         ],
         currentTheme: '',
@@ -120,11 +130,14 @@
         autoClose: '',
         showRefreshButton: '',
         showCrumbs: '',
+        currentView: setting.themeModel,
+        dayList: [6, 18]
       }
     },
     mounted() {
-      this.initThemeSetting()
       this.initUserSetting()
+      this.initThemeModel()
+      this.initThemeSetting()
     },
     methods: {
       // 初始化用户主题设置
@@ -142,33 +155,62 @@
           }
         }
 
-        this.setUpTheme(t, 'init')
+        this.setUpTheme(t)
       },
       // 设置主题
-      setUpTheme(theme, type) {
-        if(type === 'switchTheme') {
-          this.$emit('click')
-        }
+      setUpTheme(theme) {
         this.currentTheme = theme
         this.$store.dispatch('setting/setUpTheme', theme)
       },
-      setDarkTheme(theme) {
-        if(theme === 'dark') {
-          document.getElementsByTagName("body")[0].setAttribute("class","dark-body");
+      initThemeModel() {
+        let { currentView, dayList } = this
+
+        if(currentView === 'auto') {
+          this.setDarkTheme('auto')
         }else {
-          document.getElementsByTagName("body")[0].setAttribute("class","");
+          this.setDarkTheme(currentView)
         }
-        this.$emit('click')
+      },
+      setDarkTheme(theme) {
+        let el = document.getElementsByTagName("html")[0]
+
+        if(theme === 'dark') {
+          el.setAttribute("class","dark-body")
+        }else if(theme === 'white') {
+          el.removeAttribute('class')
+        }else if(theme === 'auto') {
+          this.setAutoThemeModel(el)
+        }
+        this.currentView = theme
+        this.setThemeModel()
+      },
+      setAutoThemeModel(el) {
+        let d = new Date()
+        let h = d.getHours()
+        let { dayList } = this
+        this.currentView = 'auto'
+        this.setThemeModel()
+
+        if(h >= dayList[0] && h < dayList[1]) {
+          el.removeAttribute('class')
+        }else {
+          el.setAttribute("class","dark-body")
+        }
       },
       // 初始化用户设置
       initUserSetting() {
-        let { uniqueOpened, menuButton, autoClose, showRefreshButton, showCrumbs } = this.setting
+        let { uniqueOpened, menuButton, autoClose, showRefreshButton, showCrumbs, themeModel } = this.setting
 
         this.uniqueOpened = uniqueOpened
         this.showMenuButton = menuButton
         this.autoClose = autoClose
         this.showRefreshButton = showRefreshButton
         this.showCrumbs = showCrumbs
+        this.currentView = themeModel
+
+        if(!themeModel) {
+          this.currentView = setting.themeModel
+        }
       },
       // 是否开启手风琴模式
       setLeftMenuUniqueOpened() {
@@ -203,6 +245,11 @@
         this.$store.dispatch('setting/setPersonalityAutoClose', {
           show: this.autoClose
         })
+        this.isAutoClose()
+      },
+      // 主题模式
+      setThemeModel() {
+        this.$store.dispatch('setting/setThemeModel', this.currentView)
         this.isAutoClose()
       },
       // 自动关闭
@@ -273,7 +320,7 @@
         margin: 30px 24px 0 0;
         box-shadow: 0 0 5px #ccc;
         position: relative;
-        background: #F5F7F9;
+        background: #F5F7F9 !important;
         box-sizing: border-box;
         border-radius: 3px;
         transition: box-shadow .1s;
@@ -309,7 +356,7 @@
           right: 0;
           bottom: -15px;
           margin: auto;
-          background: #19BE6B;
+          background: #19BE6B !important;
         }
       }
     }

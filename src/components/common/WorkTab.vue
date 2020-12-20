@@ -242,6 +242,7 @@
     -webkit-user-select: none;
     padding: 6px 15px;
     box-sizing: border-box;
+    background: $default-background;
 
     .tabs {
       width: 100px;
@@ -282,7 +283,7 @@
       }
 
       .activ-tab {
-        color: $theme-color;
+        color: $theme-color !important;
       }
     }
 
