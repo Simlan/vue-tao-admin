@@ -259,7 +259,7 @@
         padding: 0 12px;
         cursor: pointer;
         border-top: 2px solid transparent;
-        transition: all .1s;
+        transition: color .1s;
         background: #fff;
         border-radius: 3px;
         margin-right: 6px;

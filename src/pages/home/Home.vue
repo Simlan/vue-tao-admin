@@ -92,7 +92,7 @@
     width: 100%;
     padding: 104px 0 15px 0;
     box-sizing: border-box;
-    transition: all .3s ease-in-out;
+    transition: padding .3s ease-in-out;
     min-height: 100vh;
     overflow: hidden;
     background: $default-background;
