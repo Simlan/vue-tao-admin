@@ -63,6 +63,36 @@
       ]
     },
     {
+      "title": "组件中心",
+      "icon": "\ue61c",
+      "children": [
+        {
+          "title": "按钮",
+          "path": "/widget/button"
+        },
+        {
+          "title": "链接",
+          "path": "/widget/link"
+        },
+        {
+          "title": "文件上传",
+          "path": "/widget/upload"
+        },
+        {
+          "title": "评分",
+          "path": "/widget/rate"
+        },
+        {
+          "title": "颜色选择器",
+          "path": "/widget/color-picker"
+        },
+        {
+          "title": "表单",
+          "path": "/widget/form"
+        }
+      ]
+    },
+    {
       "title": "计划管理",
       "icon": "\ue651",
       "children": [
@@ -127,6 +157,20 @@
         {
           "title": "系统日志",
           "path": "/system/log"
+        }
+      ]
+    },
+    {
+      "title": "运维管理",
+      "icon": "\ue6b2",
+      "children": [
+        {
+          "title": "服务器管理",
+          "path": "/safeguard/server"
+        },
+        {
+          "title": "数据库管理",
+          "path": "/safeguard/database"
         }
       ]
     }

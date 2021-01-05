@@ -126,14 +126,15 @@
       },
       // 点击选项卡
       clickWorktab(path) {
+        let currentPath = this.$route.path
         let allow = this.allowPath.indexOf(path)
 
-        if(this.$route.path !== path) {
+        if(currentPath !== path) {
           if(allow !== -1) {
             this.$router.push(path)
           }else { // 无权限
             let page403 = '/exception/403'
-            if(this.$route.path !== page403) {
+            if(currentPath !== page403) {
               this.$router.push(page403)
             }
           }

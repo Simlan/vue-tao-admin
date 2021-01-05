@@ -154,6 +154,77 @@ export const allowRouters = [
       }
     ]
   },{
+    path: '/widget',
+    component: Home,
+    meta: {
+      title: '组件中心'
+    },
+    children: [
+      {
+        path: 'button',
+        component: () => import('@/pages/widget/button'),
+        meta: {
+          title: '按钮'
+        }
+      },
+      {
+        path: 'link',
+        component: () => import('@/pages/widget/link'),
+        meta: {
+          title: '链接'
+        }
+      },
+      {
+        path: 'upload',
+        component: () => import('@/pages/widget/upload'),
+        meta: {
+          title: '文件上传'
+        }
+      },
+      {
+        path: 'rate',
+        component: () => import('@/pages/widget/rate'),
+        meta: {
+          title: '评分'
+        }
+      },
+      {
+        path: 'color-picker',
+        component: () => import('@/pages/widget/ColorPicker'),
+        meta: {
+          title: '颜色选择器'
+        }
+      },
+      {
+        path: 'form',
+        component: () => import('@/pages/widget/form'),
+        meta: {
+          title: '表单'
+        }
+      }
+    ]
+  },{
+    path: '/safeguard',
+    component: Home,
+    meta: {
+      title: '运维管理'
+    },
+    children: [
+      {
+        path: 'server',
+        component: () => import('@/pages/safeguard/server'),
+        meta: {
+          title: '服务器管理'
+        }
+      },{
+        path: 'database',
+        component: () => import('@/pages/safeguard/database'),
+        meta: {
+          title: '数据库管理'
+        }
+      }
+    ]
+  },{
     path: '/plan',
     component: Home,
     meta: {
@@ -240,7 +311,6 @@ router.beforeEach((to, from, next) => {
         return
       }
     }
-
     next()
   }
 
@@ -271,48 +341,5 @@ router.beforeEach((to, from, next) => {
   }
   return
 })
-
-/**
- * 根据权限匹配路由并返回
- * @param {array} permission 后台返回的权限列表（菜单列表）
- * @param {array} allowRouters 需要权限的路由表
- */
-function routerMatch(permission, allowRouters) {
-  return new Promise((resolve) => {
-    const routers = []
-    function createRouter(permission) {
-      permission.forEach((item) => {
-        let { path } = item
-        let pathArr = path && path.split('/')
-
-        if(pathArr) {
-          path = pathArr[pathArr.length-1]
-        }
-
-        if (item.children && item.children.length) {
-          createRouter(item.children)
-        }
-
-        allowRouters.find((s) => {
-          if (s.children) {
-            s.children.find((y) => {
-              if (y.path === path) {
-                y.meta.permission = item.permission
-                routers.push(s);
-              }
-            })
-          }
-          if (path && s.path === path) {
-            s.meta.permission = item.permission
-            routers.push(s);
-          }
-        })
-      })
-    }
-
-    createRouter(permission)
-    resolve([routers])
-  })
-}
 
 export default router

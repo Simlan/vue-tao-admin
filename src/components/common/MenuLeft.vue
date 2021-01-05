@@ -141,9 +141,10 @@
       },
       // 切换页面
       goPage(path, params, item) {
-        let arr = this.$route.path.split('/')
+        let currentPath = this.$route.path
+        let arr = currentPath.split('/')
 
-        if(this.$route.path === path) { // 当前页跳转
+        if(currentPath === path) { // 当前页跳转
           if(params) {
             let { status } = params;
             
