@@ -30,16 +30,6 @@
       ]
     },
     {
-      "title": "消息中心",
-      "icon": "\ue72c",
-      "children": [
-        {
-          "title": "系统消息",
-          "path": "/message/message"
-        }
-      ]
-    },
-    {
       "title": "用户管理",
       "icon": "\ue725",
       "children": [
@@ -59,6 +49,34 @@
         {
           "title": "角色权限",
           "path": "/user/role"
+        }
+      ]
+    },
+    {
+      "title": "菜单管理",
+      "icon": "\ue662",
+      "children": [
+        {
+          "title": "权限设置",
+          "path": "/menu/menu",
+          "permission": [
+            {
+              "id": 1,
+              "title": "新增",
+              "keep_alive": 1,
+              "permission_mark": "menu/add"
+            },{
+              "id": 2,
+              "title": "编辑",
+              "keep_alive": 1,
+              "permission_mark": "menu/edit"
+            },{
+              "id": 3,
+              "title": "删除",
+              "keep_alive": 1,
+              "permission_mark": "menu/delete"
+            }
+          ]
         }
       ]
     },
@@ -103,30 +121,12 @@
       ]
     },
     {
-      "title": "菜单管理",
-      "icon": "\ue662",
+      "title": "消息中心",
+      "icon": "\ue72c",
       "children": [
         {
-          "title": "菜单列表",
-          "path": "/menu/menu",
-          "permission": [
-            {
-              "id": 1,
-              "title": "新增",
-              "keep_alive": 1,
-              "permission_mark": "menu/add"
-            },{
-              "id": 2,
-              "title": "编辑",
-              "keep_alive": 1,
-              "permission_mark": "menu/edit"
-            },{
-              "id": 3,
-              "title": "删除",
-              "keep_alive": 1,
-              "permission_mark": "menu/delete"
-            }
-          ]
+          "title": "系统消息",
+          "path": "/message/message"
         }
       ]
     },

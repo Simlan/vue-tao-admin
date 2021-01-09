@@ -1,28 +1,31 @@
 <template>
   <el-drawer
-    size="250px"
+    size="265px"
     :visible.sync="show"
     :with-header="false"
     :before-close="close"
   >
     <div class="drawer-con">
-      <p class="title">主题风格设置</p>
+      <p class="title">主题风格</p>
       <div class="theme-wrap">
-        <div v-for="item in themeList" :key="item.theme" @click="setUpTheme(item.theme)">
-          <div class="top" :style="{ background: item.tabbarBackground + '!important' }" ></div>
-          <div class="left" :style="{ background: item.menuLeftBc + '!important' }"></div>
-          <div class="active" v-if="item.theme === currentTheme"></div>
+        <div class="item" v-for="(item, index) in dayThemeList" :key="item.theme" @click="setDarkTheme(item.theme)">
+          <div class="box">
+            <div :style="{background: item.color[0] + '!important'}"></div>
+            <div :style="{background: index === 2 ? item.color[1] : item.color[0] + '!important'}"></div>
+          </div>
+          <p class="name">{{item.name}}</p>
+          <div class="active" v-show="item.theme === currentView"></div>
         </div>
       </div>
 
-      <p class="title" style="margin-top: 35px">外观</p>
-      <div class="theme-wrap">
-        <div v-for="item in dayThemeList" :key="item.theme" @click="setDarkTheme(item.theme)"
-          :style="{background: item.color[0] + '!important'}"
-        >
-          <div style="width: 50%; height: 100%; float: right" 
-            :style="{background: item.color[1] + '!important'}"></div>
-          <div class="active" v-if="item.theme === currentView"></div>
+      <p class="title" style="margin-top: 35px">菜单风格</p>
+      <div class="menu-theme-wrap">
+        <div class="item" v-for="item in themeList" :key="item.theme" @click="setUpTheme(item.theme)">
+          <div class="box">
+            <div class="top" :style="{ background: item.tabbarBackground + '!important' }" ></div>
+            <div class="left" :style="{ background: item.menuLeftBc + '!important' }"></div>
+          </div>
+          <div class="active" v-if="item.theme === currentTheme"></div>
         </div>
       </div>
 
@@ -109,19 +112,19 @@
         themeList: setting.themeList,
         dayThemeList: [
           {
+            name: '浅色',
             theme: 'white',
-            color: ['#fff', '#fff'],
-            name: '浅色'
+            color: ['#fff', '#fff']
           },
           {
+            name: '深色',
             theme: 'dark',
-            color: ['#22252A'],
-            name: '深色'
+            color: ['#22252A']
           },
           {
+            name: '自动',
             theme: 'auto',
             color: ['#fff', '#22252A'],
-            name: '自动'
           }
         ],
         currentTheme: '',
@@ -313,49 +316,106 @@
     .theme-wrap {
       display: flex;
       flex-wrap: wrap;
+      margin-top: 25px;
        
-      > div {
-        width: calc(50% - 12px);
-        height: 60px;
-        margin: 30px 24px 0 0;
-        box-shadow: 0 0 5px #ccc;
-        position: relative;
-        background: #F5F7F9 !important;
+      .item {
+        width: 65px;
         box-sizing: border-box;
-        border-radius: 3px;
-        transition: box-shadow .1s;
-        cursor: pointer;
+        margin-right: 15px;
 
-        &:hover {
-          box-shadow: 0 0 10px #ccc;
-        }
-
-        &:nth-child(even) {
+        &:last-of-type {
           margin-right: 0;
         }
 
-        .top {
+        .box {
           width: 100%;
-          height: 8px;
+          height: 45px;
+          box-shadow: 0 0 5px #ccc;
+          position: relative;
+          background: #F5F7F9;
+          box-sizing: border-box;
+          border-radius: 6px;
+          transition: box-shadow .1s;
+          cursor: pointer;
+          display: flex;
+          overflow: hidden;
+
+          >div {
+            width: 50%;
+            height: 100%;
+          }
         }
 
-        .left {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 16px;
-          height: 100%;
+        .name {
+          text-align: center;
+          margin-top: 6px;
+          color: #515a6e;
+          font-size: 12px;
         }
 
         .active {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          position: absolute;
+          position: relative;
           left: 0;
           right: 0;
-          bottom: -15px;
+          bottom: -5px;
           margin: auto;
+          background: #19BE6B !important;
+        }
+      }
+    }
+
+    .menu-theme-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 20px;
+       
+      .item {
+        width: 65px;
+        margin-right: 15px;
+
+        .box {
+          width: 65px;
+          height: 45px;
+          box-shadow: 0 0 5px #ccc;
+          position: relative;
+          background: #F5F7F9 !important;
+          box-sizing: border-box;
+          border-radius: 6px;
+          overflow: hidden;
+          transition: box-shadow .1s;
+          cursor: pointer;
+
+          &:hover {
+            box-shadow: 0 0 10px #ccc;
+          }
+
+          &:nth-child(even) {
+            margin-right: 0;
+          }
+
+          .top {
+            width: 100%;
+            height: 8px;
+          }
+
+          .left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 16px;
+            height: 100%;
+          }
+        }
+
+        .active {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          margin: auto;
+          margin-top: 8px;
           background: #19BE6B !important;
         }
       }

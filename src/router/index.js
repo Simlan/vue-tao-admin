@@ -87,6 +87,13 @@ export const allowRouters = [
         }
       },
       {
+        path: 'article-edit',
+        component: () => import('@/pages/article/ArticleEdit'),
+        meta: {
+          title: '文章编辑'
+        }
+      },
+      {
         path: 'article-list',
         component: () => import('@/pages/article/ArticleList'),
         meta: {
@@ -286,7 +293,7 @@ export const allowRouters = [
         path: 'menu',
         component: () => import('@/pages/menu/Menu'),
         meta: {
-          title: '菜单列表'
+          title: '权限设置'
         }
       }
     ]

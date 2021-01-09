@@ -111,8 +111,8 @@
 
       li {
         width: calc(20% - 15px);
-        height: 120px;
-        line-height: 120px;
+        height: 125px;
+        line-height: 125px;
         text-align: center;
         margin: 0 0 0 15px;
         box-sizing: border-box;
@@ -147,7 +147,6 @@
         .number {
           color: #515a6e;
           font-size: 26px;
-          font-weight: bold;
           line-height: 26px;
           margin: 0;
           position: absolute;

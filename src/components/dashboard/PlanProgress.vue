@@ -9,6 +9,7 @@
             <el-progress :percentage="scope.row.pro" :color="scope.row.color"/>
           </template>
         </el-table-column>
+        <el-table-column width="100px"/>
         <el-table-column prop="startDate" label="开始时间"  />
         <el-table-column prop="endDate" label="结束时间"  />
       </tao-table>
@@ -33,7 +34,7 @@
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 100,
-            color: '#2D8CF0 !important'
+            color: '#64B6F5 !important'
           },
           {
             title: '六块腹肌',
@@ -136,6 +137,10 @@
       margin-top: -10px;
       height: calc(100% - 30px);
     }
+  }
+
+  /deep/ .el-table .cell {
+    font-size: 13px;
   }
 
   @media only screen and (max-width: $device-ipad) { 

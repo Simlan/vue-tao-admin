@@ -1,5 +1,8 @@
-<p align="center">
-  <img src="https://www.qiniu.lingchen.kim/QQ%E6%B5%8F%E8%A7%88%E5%99%A8%E6%88%AA%E5%9B%BE20201108141824.png">
+<p>
+  <img src="https://www.qiniu.lingchen.kim/QQ%E6%88%AA%E5%9B%BE20210109130556.png">
+</p>
+<p>
+  <img src="https://www.qiniu.lingchen.kim/QQ%E6%88%AA%E5%9B%BE20210109130617.png">
 </p>
 
 ## 关于 Tao Admin

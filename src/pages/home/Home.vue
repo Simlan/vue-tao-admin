@@ -90,7 +90,7 @@
 <style lang="scss" scoped>
   .frame {
     width: 100%;
-    padding: 104px 0 15px 0;
+    padding: 108px 0 15px 0;
     box-sizing: border-box;
     transition: padding .3s ease-in-out;
     min-height: 100vh;

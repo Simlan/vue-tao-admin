@@ -241,7 +241,7 @@
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
-    padding: 6px 15px;
+    padding: 8px 15px;
     box-sizing: border-box;
     background: $default-background;
 

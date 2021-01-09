@@ -69,11 +69,6 @@
             cover: 'https://www.qiniu.lingchen.kim/adult-books-business-coffee-374016.jpg'
           },
           {
-            title: '二次封装 axios，根据参数来实现多个请求多次拦截',
-            des: '',
-            cover: 'https://www.qiniu.lingchen.kim/Fiyz6BXKlQKBPp9gJaStI9hY2k12'
-          },
-          {
             title: '相同特性组件的一种优化思路',
             des: '本文介绍了面对大量特性相同组件的代码组织问题的一种思路，主要应用了以下知识点：require.context、render函数以及functional组件。',
             cover: 'https://www.qiniu.lingchen.kim/FtaF6XbAXnsjRreIN-dlQaywt5ML'

@@ -33,7 +33,7 @@ export default {
       color: [
         new echarts.graphic.LinearGradient(
           0,0,0,1,[{
-          offset: 0, color: 'rgba(45, 140, 240, 1)'
+          offset: 0, color: 'rgba(45, 140, 240, 0.8)'
         },{
           offset: 1, color: 'rgba(66, 197, 246, 0.7)'
         }])

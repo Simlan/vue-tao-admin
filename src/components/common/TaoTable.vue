@@ -1,6 +1,7 @@
 <template>
   <div class="tao-table" :class="{'hide-scroll-bar': hideScrollBar}">
     <el-table ref="table"
+      row-key="id"
       :data="data || tableData"
       :height="height"
       :row-class-name="tableRowClassName"

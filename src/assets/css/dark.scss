@@ -102,13 +102,9 @@ $background-color:#22252A;
     box-shadow: none !important;
   }
 
-  .worktab .tabs li i {
-    transition: none;
-  }
-
-  .drawer-con .theme-wrap>div {
+  .drawer-con .theme-wrap .item .box,
+  .drawer-con .menu-theme-wrap .item .box {
     box-shadow: none !important;
-    border-radius: 0 !important;
     border: 1px solid $border-color !important;
   }
 

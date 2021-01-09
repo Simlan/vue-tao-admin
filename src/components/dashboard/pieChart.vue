@@ -16,7 +16,7 @@
         roseType: 'radius'
       }
       this.chartExtend = {
-        color: ['#FB5D75', '#FF9F43', '#FFC107', '#219AF8', '#21DE9E', '#9BB4F3'],
+        color: ['#F76D82', '#FF9F43', '#FFC107', '#64B6F6', '#21DE9E', '#9BB4F3'],
         legend: {
           show: false
         },

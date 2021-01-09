@@ -6,9 +6,9 @@
       <svg class="svg-icon" aria-hidden="true">
         <use xlink:href="#iconzhaopian-copy"></use>
       </svg>
-      <p v-show="!collapse" :style="{color: theme.textColor}">{{systemName}}</p>
+      <p :style="{color: theme.textColor, width: collapse ? '0' : '190px'}">{{systemName}}</p>
     </router-link>
-    
+     
     <el-menu class="el-menu" :class="'el-menu-'+ theme.theme"
       :unique-opened="uniqueOpened"
       :collapse="collapse" 
@@ -270,6 +270,8 @@
         font-size: 15px;
         margin-left: 10px;
         margin-top: 5px;
+        overflow: hidden;
+        transition: width .3s ease-in-out;
       }
     }
 

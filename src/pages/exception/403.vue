@@ -10,7 +10,7 @@
     
     <div class="bottom">
       <a href="https://www.lingchen.kim" target="_blank">博客</a>
-      <a href="https://www.lingchen.kim/detail?id=364" target="_blank">介绍</a>
+      <a href="https://www.lingchen.kim/detail?id=416" target="_blank">介绍</a>
     </div>
   </div>
 </template>

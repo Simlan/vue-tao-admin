@@ -93,7 +93,7 @@
         value: '',
         serverList: [
           {
-            name: 'SuperMane',
+            name: 'SuperMan',
             ip: '43.133.133.133',
             port: '9000',
             account: 'root',
