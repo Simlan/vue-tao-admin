@@ -11,7 +11,7 @@
       <line-chart/>
       
       <round-progress 
-        color="#5DACF4" 
+        color="#6EB2F4" 
         iconBg="#CAE2FA" 
         title="代办事项" 
         title2="本月待办事项：20" 

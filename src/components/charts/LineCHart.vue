@@ -37,7 +37,6 @@
     watch: { 
       'setting.themeModel': {
         handler(theme) {
-          console.log(theme)
           // this.getTheme(theme)
         },
         immediate: true
@@ -60,13 +59,12 @@
       // 获取数据
       getData() {
         let d = new Date(this.date)
-        let date = d.getFullYear() + '-' + (d.getMonth() + 1)
 
         this.data.xData = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 
         this.data.data = [
-          [1, 2, 1, 3, 5, 2, 1],
-          [0, 1, 0, 3, 2, 4, 3]
+          [393, 530, 923, 723, 792, 593, 492],
+          [93, 230, 623, 423, 492, 293, 216]
         ]
 
         this.drawLine()
@@ -79,7 +77,7 @@
 
         // 绘制图表
         chart.setOption({
-          color: ['#40CA5A', '#00A0E9'],
+          color: ['#308FF0', '#74D488'],
           tooltip: {
             trigger: 'axis',
             formatter: function (params) {
@@ -225,18 +223,14 @@
               areaStyle: {
                 normal: {
                   //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
-                  color: new _this.$echarts.graphic.LinearGradient(0, 0, 0, 2, [
+                  color: new _this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
                     {
                       offset: 0,
                       color: 'rgba(45, 140, 240, 0.3)'
                     },
                     {
-                      offset: 0.3,
-                      color: 'rgba(45, 140, 240, 0.1)'
-                    },
-                    {
                       offset: 1,
-                      color: 'rgba(45, 140, 240, 0.005)'
+                      color: 'rgba(45, 140, 240, 0)'
                     }
                   ])
                 }
@@ -289,18 +283,14 @@
               areaStyle: {
                 normal: {
                   //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
-                  color: new _this.$echarts.graphic.LinearGradient(0, 0, 0, 2, [
+                  color: new _this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
                     {
                       offset: 0,
                       color: 'rgba(119, 213, 138, 0.3)'
                     },
                     {
-                      offset: 0.3,
-                      color: 'rgba(119, 213, 138, 0.1)'
-                    },
-                    {
                       offset: 1,
-                      color: 'rgba(119, 213, 138, 0.005)'
+                      color: 'rgba(119, 213, 138, 0)'
                     }
                   ])
                 }

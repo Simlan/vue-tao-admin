@@ -13,15 +13,13 @@
         :data="tableData"
         style="width: 100%"
         row-key="id"
-        :load="load"
         size="medium"
         :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
         :header-cell-style="{ color: '#666' }"
       >
-        <el-table-column prop="name" label="菜单名称"/>
-        <el-table-column prop="icon" label="图标"/>
+        <el-table-column prop="title" label="菜单名称"/>
         <el-table-column prop="power" label="权限标识"/>
-        <el-table-column prop="route" label="路由"/>
+        <el-table-column prop="path" label="路由"/>
         <el-table-column prop="permission" label="可操作权限">
           <template slot-scope="scope">
             <el-popover
@@ -40,7 +38,7 @@
 
               <el-button size="mini" slot="reference" style="margin: 0 8px 6px 0">
                 <!-- <i class="iconfont" v-html="item.icon" style="font-size: 10px"></i> -->
-                {{item.name}}
+                {{item.title}}
               </el-button>
             </el-popover>
           </template>
@@ -171,190 +169,7 @@
   export default {
     data() {
       return {
-        tableData: [
-          {
-            id: 1,
-            name: '系统管理',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true,
-            permission: [
-              {
-                id: 1,
-                name: '新增'
-              },
-              {
-                id: 2,
-                name: '编辑'
-              },
-              {
-                id: 3,
-                name: '删除'
-              }
-            ]
-          },{
-            id: 2,
-            name: '用户管理',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true,
-            permission: [
-              {
-                id: 1,
-                name: '接受任务'
-              },
-              {
-                id: 2,
-                name: '审批'
-              }
-            ]
-          },{
-            id: 3,
-            name: '计划管理',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true,
-            permission: [
-              {
-                id: 1,
-                name: '新增'
-              },
-              {
-                id: 2,
-                name: '编辑'
-              },
-              {
-                id: 3,
-                name: '删除'
-              }
-            ]
-          },{
-            id: 4,
-            name: '消息中心',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true
-          },{
-            id: 5,
-            name: '菜单管理',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true
-          },{
-            id: 6,
-            name: '异常管理',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true
-          },{
-            id: 7,
-            name: '文章管理',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true
-          },{
-            id: 8,
-            name: '监控中心',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true
-          },{
-            id: 9,
-            name: '组件中心',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true
-          },{
-            id: 10,
-            name: '表单管理',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true
-          },{
-            id: 11,
-            name: '多语言',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true
-          },{
-            id: 12,
-            name: '多语言',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true
-          },{
-            id: 13,
-            name: '系统设置',
-            icon: '',
-            sort: 1,
-            power: 'menu/list',
-            route: 'system/user/index',
-            keepAlive: true,
-            show: true,
-            date: '2016-05-02 14:40',
-            hasChildren: true
-          },
-        ],
+        tableData: [],
         dialogVisible: false,
         labelPosition: 'menu',
         ruleForm: {
@@ -371,30 +186,11 @@
         }
       };
     },
+    mounted() {
+      let { menuList } = this.$store.state.menu
+      this.tableData = menuList
+    },
     methods: {
-      load(tree, treeNode, resolve) {
-        setTimeout(() => {
-          resolve([
-            {
-              id: 31,
-              date: '2016-05-01',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-              id: 32,
-              date: '2016-05-01',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1519 弄'
-            }
-          ])
-        }, 200)
-      },
-      handleEdit(e) {
-
-      },
-      handleDelete(e) {
-        
-      },
       handleChange() {
 
       },

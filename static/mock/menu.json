@@ -2,76 +2,89 @@
 	"code": 200,
 	"data": [
     {
+      "id": 1,
       "title": "监控中心",
       "icon": "\ue6b2",
       "children": [
         {
+          "id": 101,
           "title": "工作台",
           "path": "/dashboard/console"
         }
       ]
     },
     {
+      "id": 2,
       "title": "文章管理", 
       "icon": "\ue61e",
       "children": [
         {
+          "id": 201,
           "title": "文章列表",
           "path": "/article/article-list"
         },
         {
+          "id": 202,
           "title": "文章分类",
           "path": "/article/classify"
         },
         {
+          "id": 203,
           "title": "文章发布",
           "path": "/article/article-publish"
         }
       ]
     },
     {
+      "id": 3,
       "title": "用户管理",
       "icon": "\ue725",
       "children": [
         {
+          "id": 301,
           "title": "个人中心",
           "path": "/user/user",
           "noMenu": true
         },
         {
+          "id": 302,
           "title": "账号管理",
           "path": "/user/account"
         },
         {
+          "id": 303,
           "title": "部门管理",
           "path": "/user/department"
         },
         {
+          "id": 304,
           "title": "角色权限",
           "path": "/user/role"
         }
       ]
     },
     {
+      "id": 4,
       "title": "菜单管理",
       "icon": "\ue662",
       "children": [
         {
+          "id": 401,
           "title": "权限设置",
           "path": "/menu/menu",
           "permission": [
             {
-              "id": 1,
+              "id": 4011,
               "title": "新增",
               "keep_alive": 1,
               "permission_mark": "menu/add"
             },{
-              "id": 2,
+              "id": 4012,
               "title": "编辑",
               "keep_alive": 1,
               "permission_mark": "menu/edit"
             },{
-              "id": 3,
+              "id": 4013,
               "title": "删除",
               "keep_alive": 1,
               "permission_mark": "menu/delete"
@@ -81,94 +94,115 @@
       ]
     },
     {
+      "id": 5,
       "title": "组件中心",
       "icon": "\ue61c",
       "children": [
         {
+          "id": 501,
           "title": "按钮",
           "path": "/widget/button"
         },
         {
+          "id": 502,
           "title": "链接",
           "path": "/widget/link"
         },
         {
+          "id": 503,
           "title": "文件上传",
           "path": "/widget/upload"
         },
         {
+          "id": 504,
           "title": "评分",
           "path": "/widget/rate"
         },
         {
+          "id": 505,
           "title": "颜色选择器",
           "path": "/widget/color-picker"
         },
         {
+          "id": 506,
           "title": "表单",
           "path": "/widget/form"
         }
       ]
     },
     {
+      "id": 6,
       "title": "计划管理",
       "icon": "\ue651",
       "children": [
         {
+          "id": 601,
           "title": "年度计划",
           "path": "/plan/year-plan"
         }
       ]
     },
     {
+      "id": 7,
       "title": "消息中心",
       "icon": "\ue72c",
       "children": [
         {
+          "id": 701,
           "title": "系统消息",
           "path": "/message/message"
         }
       ]
     },
     {
+      "id": 8,
       "title": "异常页面",
       "icon": "\ue600",
       "children": [
         {
+          "id": 801,
           "title": "403",
           "path": "/exception/403"
         }, {
+          "id": 802,
           "title": "404",
           "path": "/exception/404"
         },{
+          "id": 803,
           "title": "500",
           "path": "/exception/500"
         }
       ]
     },
     {
+      "id": 9,
       "title": "系统设置",
       "icon": "\ue65d",
       "children": [
         {
+          "id": 901,
           "title": "系统设置",
           "path": "/system/setting"
         },
         {
+          "id": 902,
           "title": "系统日志",
           "path": "/system/log"
         }
       ]
     },
     {
+      "id": 10,
       "title": "运维管理",
       "icon": "\ue6b2",
       "children": [
         {
+          "id": 1010,
           "title": "服务器管理",
           "path": "/safeguard/server"
         },
         {
+          "id": 1011,
           "title": "数据库管理",
           "path": "/safeguard/database"
         }

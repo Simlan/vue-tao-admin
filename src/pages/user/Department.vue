@@ -5,10 +5,10 @@
         <el-input placeholder="名称"></el-input>
       </el-col>
       <el-button>搜索</el-button>
-      <el-button>新增部门</el-button>
+      <el-button @click="showDialog('add')">新增部门</el-button>
     </el-row>
 
-    <el-row style="margin-top: 15px">
+    <el-row style="margin-top: 15px"> 
       <tao-table
         :data="tableData"
         default-expand-all
@@ -27,7 +27,7 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="150px">
           <template>
-            <el-button type="text" icon="el-icon-edit">
+            <el-button type="text" icon="el-icon-edit" @click="showDialog('edit')">
               编辑
             </el-button>
             <el-button type="text" style="color: #FA6962" icon="el-icon-delete" >
@@ -37,6 +37,25 @@
         </el-table-column>
       </tao-table>
     </el-row>
+
+    <el-dialog :title="dialogTitle" width="500px" :visible.sync="dvEdit" @closed="closeDialog" top="25vh">
+      <el-form ref="form" :model="form" label-width="60px">
+        <el-form-item label="名称">
+          <el-input v-model="form.name"></el-input>
+        </el-form-item>
+        <el-form-item label="排序">
+          <el-input-number v-model="form.sort" controls-position="right" :min="1"></el-input-number>
+        </el-form-item>
+        <el-form-item label="状态">
+          <el-switch v-model="form.status"></el-switch>
+        </el-form-item>
+      </el-form>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dvEdit = false">取 消</el-button>
+        <el-button type="primary" @click="onSubmit">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -52,11 +71,8 @@
         },
         count: 1,
         form: {
-          username: '',
-          mibile: '',
-          email: '',
-          sex: 1,
-          dep: '',
+          name: '',
+          sort: '',
           status: true
         },
         tableData: [
@@ -155,16 +171,32 @@
     methods: {
       showDialog(type) {
         this.dvEdit = true
-        this.dialogTitle = type === 'add' ? '新增用户' : '编辑用户'
+        this.dialogTitle = type === 'add' ? '新增部门' : '编辑部门'
       },
       onSubmit() {
         this.dvEdit = false
+      },
+      deleteUser(scope) {
+        this.$confirm('您确定要删除当前部门吗', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'error'
+        }).then(() => {
+          this.userList.splice(scope.$index, 1)
+        }).catch(() => {})
       },
       handleCheckChange(data, checked, indeterminate) {
         // console.log(data, checked, indeterminate);
       },
       handleNodeClick(data) {
         // console.log(data);
+      },
+      closeDialog() {
+        this.form = {
+          name: '',
+          sort: '',
+          status: true
+        }
       }
     }
   }

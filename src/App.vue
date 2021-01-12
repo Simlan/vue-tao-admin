@@ -11,7 +11,6 @@
   export default {
     name: 'App',
     created() {
-      this.noRebound()
       this.getMenuList()
     },
     methods: {
@@ -79,12 +78,6 @@
           createRouter(permission)
           resolve(Array.from(new Set(routers)))
         })
-      },
-      // 阻止下拉滑动回弹
-      noRebound() {
-        document.body.addEventListener('touchmove', function (e) {
-          e.preventDefault()
-        }, {passive: false})
       }
     }
   }
