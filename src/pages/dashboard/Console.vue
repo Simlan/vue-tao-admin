@@ -41,26 +41,7 @@
     },
     data () {
       return {
-        radius: ['40%', '52%'],
-        center: ['60%', '50%'],
-        roundP: {fontSize: '25px'},
-        roundStyle: {width: '2rem', top: '42.4%', left: '20%', right: 0, margin: 'auto'},
-        bottomTitleStyle: {top: '80%', left: '20%', right: 0, margin: 'auto'},
-        libraryList: {
-          columns: ['类型', '数量'],
-          rows: [
-            {
-              '类型': `1 `, '数量': 10 
-            },
-            {
-              '类型': `2 `, '数量': 10 
-            },
-            {
-              '类型': `3 `, '数量': 10 
-            }
-          ]
-        },
-        libraryTotal: 10
+        
       }
     }
   }
