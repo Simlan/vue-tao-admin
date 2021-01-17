@@ -6,7 +6,7 @@
       </el-col>
       <el-button>搜索</el-button>
     </el-row>
-    <tao-table :data="logList" style="margin-top: 15px">
+    <tao-table :data="logList" :showPage="false" style="margin-top: 15px">
       <el-table-column label="用户名" prop="username"/>
       <el-table-column label="ip地址" prop="ip"/>
       <el-table-column label="浏览器" prop="browser"/>

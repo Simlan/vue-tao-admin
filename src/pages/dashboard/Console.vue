@@ -28,7 +28,7 @@
   import PlanProgress from "@/components/dashboard/PlanProgress"
   import PieChart from "@/components/dashboard/PieChart"
   import ConsoleCard from "@/components/dashboard/ConsoleCard"
-  import LineChart from "@/components/charts/LineChart"
+  import LineChart from "@/components/dashboard/LineChart"
 
   export default {
     components: { 

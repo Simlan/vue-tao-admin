@@ -8,7 +8,7 @@
       <el-button @click="showDialog('add')">新增角色</el-button>
     </el-row>
 
-    <tao-table style="margin-top: 15px" :data="roleList">
+    <tao-table style="margin-top: 15px" :data="roleList" :showPage="false">
       <el-table-column label="角色名称" prop="name"/>
       <el-table-column label="拥有权限" prop="allow"/>
       <el-table-column label="描述" prop="des"/>

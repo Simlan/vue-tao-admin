@@ -17,16 +17,23 @@
       <div class="login-wrap">
         <div class="form">
           <h3>登 录</h3>
-          <el-col style="margin-top: 80px">
+          <el-col style="margin-top: 30px">
             <span class="input-label">账号</span>
-            <el-input placeholder="admin" size="medium" v-model="account"/>
+            <el-input placeholder="admin" size="medium" v-model.trim="account"/>
           </el-col>
           <el-col style="margin-top: 15px">
             <span class="input-label">密码</span>
-            <el-input placeholder="123456" size="medium" v-model="password" type="password"
+            <el-input placeholder="123456" size="medium" v-model.trim="password" type="password"
               autocomplete="off"
               @keyup.enter.native="login"
             />
+          </el-col>
+          <el-col style="margin-top: 15px">
+            <span class="input-label">验证码</span>
+            <el-col class="code">
+              <el-input size="medium" v-model.trim="code" @keyup.enter.native="login"/>
+              <img :src="captcha.picPath" @click="getCaptcha()"/>
+            </el-col>
           </el-col>
           <el-col style="margin-top: 30px">
             <el-button class="login-btn" @click="login" :loading="loading">
@@ -43,22 +50,39 @@
   import CryptoJS from "crypto-js";
   import setting from '@/config/setting'
   import { setCookie, getCookie, encrypt } from '@/utils/utils'
+  import { getCaptchaApi, loginApi } from '@/api/loginApi'
 
   export default {
     data () {
       return {
         account: setting.login.username,
         password: setting.login.password,
+        code: '',
         backgroundImage: require('@img/login_form_bg.jpg'),
         lfBg: require('@img/lf_bg.png'),
         loading: false,
         btnText: '登录',
+        captcha: {
+          captchaId: '',
+          picPath: ''
+        }
       }
     },
+    mounted() {
+      this.getCaptcha()
+    },
     methods: {
+      // 获取验证码
+      getCaptcha() {
+        getCaptchaApi().then(res => {
+          if(res.code === 0) {
+            this.captcha = res.data
+          }
+        })
+      },
+      // 登录
       login() {
-        let {account, password} = this
-        let {username, password:pwd} = setting.login
+        let {account, password, code, captcha} = this
 
         if(!account) {
           this.$message.error('请输入账号')
@@ -70,20 +94,34 @@
           return
         }
 
-        if(account !== username || password !== pwd) {
-          this.$message.error('账号或密码错误')
+        if(!code) {
+          this.$message.error('请输入验证码')
           return
         }
 
-        this.loading = true
-        this.btnText = '登录中...'
+        loginApi({
+          username: account,
+          password: password,
+          captcha: code,
+          captchaId: captcha.captchaId
+        }).then(res => {
+          if(res.code === 0) {
+            this.loading = true
+            this.btnText = '登录中...'
+            this.$store.dispatch('user/setUserInfo', res.data)
 
-        setCookie('userName', account, 1)
-        setCookie('userPwd', encrypt(password), 1) // 加密
+            setCookie('userName', account, 1)
+            setCookie('userPwd', encrypt(password), 1) // 加密
 
-        setTimeout(() => {
-          this.$router.push('/')
-        }, 1000)
+            setTimeout(() => {
+              this.$router.push('/')
+            }, 1000)
+          }
+
+          if(res.code === 7) {
+            this.getCaptcha()
+          }
+        })
       }
     }
   }
@@ -154,7 +192,7 @@
           widows: 100%;
           height: 100%;
           box-sizing: border-box;
-          padding: 50px 30px;
+          padding: 40px 30px;
           background: #fff;
 
           h3 {
@@ -169,6 +207,24 @@
             font-size: 14px;
             padding: 8px 0;
             display: block;
+          }
+
+          .code {
+            display: flex;
+            justify-content: space-between;
+
+            .el-input {
+              flex: 1;
+              margin-right: 20px;
+            }
+
+            img {
+              width: 115px;
+              height: 40px;
+              cursor: pointer;
+              border-radius: 5px;
+              background: #f8f8f8 !important;
+            }
           }
 
           .login-btn {

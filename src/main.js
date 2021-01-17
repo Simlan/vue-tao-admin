@@ -11,9 +11,9 @@ import ElementUI from 'element-ui'  // 组件库
 import vuescroll from 'vuescroll'   // 滚动插件
 import i18n from './lang/i18n'      // 多语言
 import VCharts from 'v-charts'      // echarts封装版
-import Notice from '@/components/Message/index.js'  // 全局提示
-import components from '@/components/index.js'      // 注册全局组件
-import derectives from '@/utils/directives.js'      // 注册全局指令
+import Notice from '@/components/Message'  // 全局提示
+import components from '@/components'      // 注册全局组件
+import derectives from '@/directives'      // 注册全局指令
 
 Vue.use(components)
 Vue.use(derectives)

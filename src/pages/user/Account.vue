@@ -61,7 +61,7 @@
       </div>
     </table-bar>
     
-    <tao-table :data="userList">
+    <tao-table :data="userList" :showPage="false">
       <el-table-column label="头像" prop="avatar">
         <template slot-scope="scope">
           <img class="avatar" :src="scope.row.avatar"/>

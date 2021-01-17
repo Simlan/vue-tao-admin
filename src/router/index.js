@@ -295,6 +295,20 @@ export const allowRouters = [
         meta: {
           title: '权限设置'
         }
+      },
+      {
+        path: 'api',
+        component: () => import('@/pages/menu/api'),
+        meta: {
+          title: 'API管理'
+        }
+      },
+      {
+        path: 'operation',
+        component: () => import('@/pages/menu/operation'),
+        meta: {
+          title: '操作历史'
+        }
       }
     ]
   }

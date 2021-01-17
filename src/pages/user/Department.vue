@@ -11,6 +11,7 @@
     <el-row style="margin-top: 15px"> 
       <tao-table
         :data="tableData"
+        :showPage="false"
         default-expand-all
         :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
         size="mediul"

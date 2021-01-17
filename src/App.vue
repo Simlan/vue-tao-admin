@@ -16,11 +16,11 @@
     methods: {
       // 获取菜单列表
       getMenuList() {
-        let isPro = location.href.indexOf('tao_admin')
+        let{ href } = location
         let url = '/static/mock/menu.json'
 
-        if(isPro !== -1) {
-          url = '/tao_admin' + url
+        if(href.indexOf('localhost') === -1) {
+          url = '/' + href.split('/')[3] + url
         }
 
         axios.get(url).then((res) => {

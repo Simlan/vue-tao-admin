@@ -7,7 +7,7 @@
       <el-button>搜索</el-button>
     </el-row>
 
-    <tao-table style="margin-top: 15px">
+    <tao-table :showPage="false" style="margin-top: 15px">
       <el-table-column prop="default" label="标题" show-overflow-tooltip />
       <el-table-column prop="default" label="内容" show-overflow-tooltip />
       <el-table-column prop="default" label="发送人" show-overflow-tooltip />

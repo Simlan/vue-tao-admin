@@ -90,6 +90,11 @@
               "permission_mark": "menu/delete"
             }
           ]
+        },
+        {
+          "id": 402,
+          "title": "API管理",
+          "path": "/menu/api"
         }
       ]
     },

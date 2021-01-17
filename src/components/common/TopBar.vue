@@ -17,8 +17,8 @@
         <div class="user">
           <el-dropdown @command="goPage">
             <div>
-              <img class="cover" src="@img/avatar.png" style="float: left"/>
-              <span class="name">{{$t('user.name')}}</span>
+              <img class="cover" :src="userInfo.headerImg" style="float: left"/>
+              <span class="name">{{userInfo.nickName}}</span>
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="/user/user">
@@ -74,6 +74,7 @@
     inject: ['reload'],
     computed: {
       ...mapState({
+        userInfo: state => state.user.user.info,
         setting: state => state.setting.setting,
       }),
       topWidth() {
@@ -102,6 +103,7 @@
     },
     mounted() {
       this.initSetting()
+      
     },
     methods: {
       // 初始化个性设置

@@ -61,15 +61,15 @@
     <!-- 分页 -->
     <el-pagination
       background
-      :page-size="pageData.per_page"
-      :total="pageData.total"
-      :page-sizes="[1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50]"
-      :current-page.sync="pageData.current_page"
+      :page-size="page.pageSize"
+      :total="page.total"
+      :page-sizes="[14, 20, 30, 40, 50, 60, 70, 80]"
+      :current-page.sync="page.page"
       @current-change="changePage"
       @size-change="changeSize"
       :layout="pageLaout"
       :hide-on-single-page="hideOnePage"
-      v-if="showPage && pageData.total > 0"
+      v-if="showPage && page.total > 0"
     />
   </div>
 </template>
@@ -110,7 +110,7 @@ export default {
     },
     pageLaout: {
       type: String,
-      default: "prev, pager, next, jumper, sizes"
+      default: "prev, pager, next, jumper"
     },
     Bottom: {
       type: Number,
