@@ -8,7 +8,7 @@
 ## 关于 Tao Admin
 [Tao Admin](https://www.lingchen.kim/Detail?id=416) 是一套企业级的高颜值、高性能的通用型后台前端解决方案， 致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件， 进一步提升企业级后台产品设计研发过程中的『用户』和『设计者』的体验。 在力求提供开箱即用的开发体验下，还提供了完整的脚手架， 涉及用户管理，权限管理，国际化，通用组件，工具包，网络请求等各个方面。 为后台管理系统中常见的方案提供了最佳实践来减少学习和开发成本。。</p>
 
-- [在线预览](https://www.lingchen.kim/tao_admin)
+- [在线预览](http://www.lingchen.kim/tao_admin)
 - [使用手册](http://www.lingchen.kim/tao_admin_doc)
 - [博主博客地址](https://www.lingchen.kim)
 
