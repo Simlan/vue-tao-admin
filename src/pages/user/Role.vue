@@ -1,11 +1,13 @@
 <template>
   <div class='page-content'>
     <el-row :gutter="20">
-      <el-col :span="4">
+      <el-col :xs="24" :sm="12" :lg="4">
         <el-input placeholder="用户名或昵称"></el-input>
       </el-col>
-      <el-button>搜索</el-button>
-      <el-button @click="showDialog('add')">新增角色</el-button>
+      <el-col :xs="24" :sm="12" :lg="4" class="el-col2">
+        <el-button>搜索</el-button>
+        <el-button @click="showDialog('add')">新增角色</el-button>
+      </el-col>
     </el-row>
 
     <tao-table style="margin-top: 15px" :data="roleList" :showPage="false">

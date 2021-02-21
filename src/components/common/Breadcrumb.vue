@@ -73,4 +73,10 @@
       }
     }
   }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .breadcrumb {
+      display: none;
+    }
+  }
 </style>

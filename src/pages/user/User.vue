@@ -33,34 +33,34 @@
         label-position="top"
       >
         <el-form-item label="昵称" prop="name">
-          <el-col :span="10">
+          <el-col :xs="24" :sm="12" :lg="6">
             <el-input v-model="ruleForm.name"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="邮箱" prop="name">
-          <el-col :span="10">
+        <el-form-item label="邮箱" prop="email">
+          <el-col :xs="24" :sm="12" :lg="6">
             <el-input v-model="ruleForm.name"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="手机" prop="name">
-          <el-col :span="10">
+        <el-form-item label="手机" prop="phone">
+          <el-col :xs="24" :sm="12" :lg="6">
             <el-input v-model="ruleForm.name"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="公司" prop="name">
-          <el-col :span="10">
+        <el-form-item label="公司" prop="company">
+          <el-col :xs="24" :sm="12" :lg="6">
             <el-input v-model="ruleForm.name"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="性别" prop="resource">
+        <el-form-item label="性别" prop="sex">
           <el-radio-group v-model="ruleForm.resource">
             <el-radio label="男"></el-radio>
             <el-radio label="女"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="个人介绍" prop="desc">
-          <el-col :span="10">
-            <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+          <el-col :xs="24" :sm="12" :lg="6">
+            <el-input type="textarea" rows="4" v-model="ruleForm.desc"></el-input>
           </el-col>
         </el-form-item>
         <el-form-item>
@@ -78,36 +78,28 @@
         date: '',
         ruleForm: {
           name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          email: '',
+          phone: '',
+          company: '',
+          sex: false,
+          sesc: '',
         },
         rules: {
           name: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+            { required: true, message: '请输入昵称', trigger: 'blur' },
+            { min: 2, max: 50, message: '长度在 2 到 30 个字符', trigger: 'blur' }
           ],
-          region: [
-            { required: true, message: '请选择活动区域', trigger: 'change' }
+          email: [
+            { required: true, message: '请输入昵称', trigger: 'blur' }
           ],
-          date1: [
-            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+          phone: [
+            { type: 'date', required: true, message: '请输入手机号码', trigger: 'blur' }
           ],
-          date2: [
-            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+          company: [
+            { type: 'date', required: true, message: '请输入公司', trigger: 'blur' }
           ],
-          type: [
-            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-          ],
-          resource: [
-            { required: true, message: '请选择活动资源', trigger: 'change' }
-          ],
-          desc: [
-            { required: true, message: '请填写活动形式', trigger: 'blur' }
+          sex: [
+            { type: 'array', required: true, message: '请选择性别', trigger: 'blur' }
           ]
         }
       };
@@ -237,6 +229,62 @@
       .form {
         padding: 30px 40px;
         box-sizing: border-box;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .page-content {
+
+      .header {
+        padding: 20px 20px;
+
+        .left-wrap {
+          .avatar {
+            width: 90px;
+            height: 90px;
+          }
+
+          h2 {
+            font-size: 20px;
+            margin-top: 20px;
+          }
+
+          .task {
+            margin-top: 15px;
+
+            .icon {
+              width: 2.8em;
+              height: 2.8em;
+              vertical-align: -0.15em;
+            }
+
+            span {
+              font-size: 15px;
+            }
+          }
+        }
+
+        .right-wrap {
+          display: flex;
+          align-items: center;
+
+          img {
+            display: none;
+          }
+        }
+      }
+
+      .info {
+
+        .title {
+          font-size: 18px;
+          padding: 15px 20px;
+        }
+
+        .form {
+          padding: 30px 20px;
+        }
       }
     }
   }

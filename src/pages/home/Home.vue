@@ -1,7 +1,7 @@
 <template>
   <div class="frame" :style="{paddingLeft}">
     <!-- 左侧菜单 -->
-    <menu-left ref="menuLeft"/>
+    <menu-left ref="menuLeft" @topBarCollapse="topBarCollapse" />
 
     <!-- 顶栏、选项卡 -->
     <top-bar 
@@ -77,6 +77,9 @@
       visibleMenu() {
         this.menuOpen = !this.menuOpen
         this.$refs.menuLeft.visibleMenu();
+      },
+      topBarCollapse(show) {
+        this.menuOpen = show
       },
       personalityShow() {
         this.personalityOpen = !this.personalityOpen

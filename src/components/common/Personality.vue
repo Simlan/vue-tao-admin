@@ -61,7 +61,7 @@
           >
           </el-switch>
         </div>
-        <div class="item">
+        <div class="item mobile-hide">
           <span>显示全局面包屑导航</span>
           <el-switch
             v-model="showCrumbs"
@@ -433,6 +433,12 @@
           font-size: 14px;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: $device-ipad){
+    .mobile-hide {
+      display: none !important;
     }
   }
 </style>

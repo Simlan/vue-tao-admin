@@ -1,12 +1,20 @@
 <template>
-  <div class="menu">
+  <div class="menu" v-if="showMenuMobile">
     <router-link tag="div" class="el-menu-header"
       :style="{background: theme.menuLeftBc}" to="/"
     >
-      <svg class="svg-icon" aria-hidden="true">
-        <use xlink:href="#iconzhaopian-copy"></use>
-      </svg>
-      <p :style="{color: theme.textColor, width: collapse ? '0' : '190px'}">{{systemName}}</p>
+      <div class="pc-header">
+        <svg class="svg-icon" aria-hidden="true">
+          <use xlink:href="#iconzhaopian-copy"></use>
+        </svg>
+        <p :style="{color: theme.textColor, width: collapse ? '0' : '190px'}">{{systemName}}</p>
+      </div>
+      <div class="phone-header" :style="{width: collapseMobile ? '0' : '100%'}">
+        <svg class="svg-icon" aria-hidden="true">
+          <use xlink:href="#iconzhaopian-copy"></use>
+        </svg>
+        <!-- <p :style="{color: theme.textColor, width: collapseMobile ? '0' : '100%'}" >{{systemName}}</p> -->
+      </div>
     </router-link>
      
     <el-menu class="el-menu" :class="'el-menu-'+ theme.theme"
@@ -51,6 +59,9 @@
         </div>
       </el-submenu>
     </el-menu>
+    <div class="menu-model" @click="visibleMenu()" 
+      :style="{opacity: collapse ? 0 : 1, transform: showMobileModel ? 'scale(1)' : 'scale(0)'}">
+    </div>
   </div>
 </template>
 
@@ -97,15 +108,59 @@
         systemName: setting.systemName, // 系统名称
         menuList: [],                   // 菜单数据
         collapse: false,                // 是否水平折叠收起菜单
+        collapseMobile: false,           // 移动端菜header折叠
         theme: {},                      // 主题
         uniqueOpened: '',               // 是否只保持一个子菜单的展开
+        screenWidth: '',
+        isMobileModel: false,
+        showMenuMobile: false,
+        showMobileModel: false,
+        resizeList: [0, 0]
       }
     },
     mounted() {
+      this.lisenterWindowResize()
       this.initUserSetting()
       this.getMenuList()
     },
     methods: {
+      lisenterWindowResize() {
+        this.screenWidth = document.body.clientWidth;
+        this.setMenuModel()
+
+        window.onresize = () => {
+          return (() => {
+            this.screenWidth = document.body.clientWidth;
+            this.setMenuModel()
+          })();
+        };
+      },
+      setMenuModel() {
+        let { screenWidth, resizeList } = this
+
+        if(screenWidth > 800) {
+          if(resizeList[0] === 0) {
+            this.isMobileModel = false
+            this.collapse = false
+            this.collapseMobile = false
+            this.showMenuMobile = true
+            this.$emit('topBarCollapse', true)
+          }
+          
+          this.$set(this.resizeList, 0, 1)
+        }else {
+          this.isMobileModel = true
+          this.collapse = true
+          this.$emit('topBarCollapse', false)
+          this.collapseMobile = true
+          this.showMobileModel = false
+          this.$set(this.resizeList, 0, 0)
+        }
+
+        setTimeout(() => {
+          this.showMenuMobile = true
+        }, 10)
+      },
       // 获取菜单列表|权限列表
       getMenuList() {
         this.menuList = this.$store.state.menu.menuList
@@ -126,6 +181,19 @@
       // 菜单展开 | 收缩
       visibleMenu() {
         this.collapse = !this.collapse
+
+        setTimeout(() => {
+          this.collapseMobile = !this.collapseMobile
+        }, 200)
+        
+        // 移动端模态框
+        if(!this.showMobileModel) {
+          this.showMobileModel = true
+        }else {
+          setTimeout(() => {
+            this.showMobileModel = false
+          }, 200)
+        }
       },
       // 返回子菜单路径
       routerPathCihld(item) {
@@ -143,6 +211,12 @@
       goPage(path, params, item) {
         let currentPath = this.$route.path
         let arr = currentPath.split('/')
+
+        if(this.isMobileModel) {
+          this.collapse = true
+          this.collapseMobile = true
+          this.showMobileModel = false
+        }
 
         if(currentPath === path) { // 当前页跳转
           if(params) {
@@ -248,30 +322,38 @@
     box-shadow: 5px 5px 8px 0 rgba(29,35,41,.05);
 
     .el-menu-header {
-      height: 45px;
-      line-height: 45px;
-      padding-left: 25px;
-      box-sizing: border-box;
-      display: flex;
-      cursor: pointer;
-      overflow: hidden;
-
-      .svg-icon {
-        width: 22px;
-        vertical-align: -0.15em;
-        fill: currentColor;
+      
+      > div {
+        height: 45px;
+        line-height: 45px;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: flex;
         overflow: hidden;
-        margin-left: -2px;
-        margin-top: 10px;
+        // padding-left: 25px;
+
+        .svg-icon {
+          width: 22px;
+          vertical-align: -0.15em;
+          fill: currentColor;
+          overflow: hidden;
+          margin-left: -2px;
+          margin-top: 10px;
+          margin-left: 25px;
+        }
+
+        p {
+          color: #C3C3C3;
+          font-size: 15px;
+          margin-left: 10px;
+          margin-top: 5px;
+          overflow: hidden;
+          transition: width .3s ease-in-out;
+        }
       }
 
-      p {
-        color: #C3C3C3;
-        font-size: 15px;
-        margin-left: 10px;
-        margin-top: 5px;
-        overflow: hidden;
-        transition: width .3s ease-in-out;
+      .phone-header {
+        display: none;
       }
     }
 
@@ -289,11 +371,44 @@
     .el-menu:not(.el-menu--collapse) {
       width: $menu-left-open-width;
     }
+
+    .menu-model {
+      display: none;
+    }
   }
 
   @media only screen and (max-width: $device-ipad) { 
     .menu {
-      display: none;
+
+      .el-menu-header { 
+        padding: 0;
+
+        .pc-header {
+          display: none;
+        }
+
+        .phone-header {
+          display: flex;
+          overflow: hidden;
+          box-sizing: border-box;
+        }
+      }
+
+      .el-menu--collapse {
+        width: 0;
+      }
+
+      .menu-model {
+        display: block;
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        background: rgba($color: #000000, $alpha: 0.5);
+        transition: opacity .2s ease-in-out;
+      }
     }
   }
 </style>

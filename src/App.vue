@@ -99,4 +99,53 @@
       opacity: 0.7;
     }
   }
+
+  // 处理移动端组件兼容性
+  @media screen and (max-width: $device-phone){
+    * {
+      cursor: default !important;
+    }
+
+    .el-col2 {
+      margin-top: 15px;
+    }
+
+    .el-message-box,
+    .el-message,
+    .el-dialog {
+      width: calc(100% - 24px) !important;
+    }
+
+    // 覆盖消息提示组件
+    .el-message {
+      min-width: 220px !important;
+      padding: 12px 16px !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      background: #fff;
+      border-radius: 4px;
+      border: 0;
+
+      .el-message__icon {
+        font-size: 16px;
+      }
+
+      .el-icon-success {
+        color: #50DCD5;
+      }
+    }
+
+    .el-date-picker.has-sidebar.has-time {
+      width: calc(100% - 24px);
+      left: 12px !important;
+    }
+
+    .el-picker-panel *[slot=sidebar], .el-picker-panel__sidebar {
+      display: none;
+    }
+
+    .el-picker-panel *[slot=sidebar] + .el-picker-panel__body, 
+    .el-picker-panel__sidebar + .el-picker-panel__body {
+      margin-left: 0;
+    }
+  }
 </style>

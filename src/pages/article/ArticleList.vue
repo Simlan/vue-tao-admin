@@ -41,7 +41,9 @@
           </div>
         </div>
         <div class="right">
-          <img :src="item.cover"/>
+          <div class="cover">
+            <img :src="item.cover"/>
+          </div>
         </div>
       </div>
     </div>
@@ -183,10 +185,65 @@
 
         .right {
 
-          img {
+          .cover {
             width: 200px;
             height: 120px;
             border-radius: 3px;
+
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .page-content {
+      padding: 20px;
+
+      .article-list {
+
+        .item {
+          padding: 18px 0;
+          display: block;
+
+          &:first-of-type {
+            padding-top: 0;
+          }
+
+          .left {
+            max-width: 100%;
+
+            .des {
+              margin: 5px 0 10px 0;
+              @include ellipsis(2);
+            }
+
+            .outer {
+              position: absolute;
+              bottom: 12px;
+            }
+          }
+
+          .right {
+            padding-bottom: 20px;
+
+            .cover {
+              width: 100%;
+              height: 0;
+              padding-bottom: 60%;
+              position: relative;
+
+              img {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+              }
+            }
           }
         }
       }

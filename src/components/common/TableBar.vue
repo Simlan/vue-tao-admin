@@ -3,7 +3,7 @@
     <div class="top-wrap" v-show="showSearchWrap">
       <slot name="top"></slot>
     </div>
-    <div class="bottom-wrap">
+    <div class="bottom-wrap" v-if="showBottom">
       <div class="left-wrap">
         <slot name="bottom"></slot>
       </div>
@@ -24,6 +24,10 @@
     inject: ['reload'],
     props: {
       showTop: {
+        type: Boolean,
+        default: true
+      },
+      showBottom: {
         type: Boolean,
         default: true
       }
@@ -60,6 +64,12 @@
     .bottom-wrap {
       display: flex;
       justify-content: space-between;
+    }
+  }
+
+  @media screen and (max-width: $device-phone){
+    /deep/ .el-form {
+      padding-bottom: 15px;
     }
   }
 </style>

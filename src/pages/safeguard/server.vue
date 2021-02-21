@@ -4,18 +4,18 @@
       <div slot="top">
         <el-form label-width="70px">
           <el-row :gutter="20">
-            <el-col :span="4">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="名称：">
                 <el-input placeholder="名称"></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="4">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="IP：">
                 <el-input placeholder="IP"></el-input>
               </el-form-item>
             </el-col>
             
-            <el-row :span="4" style="float: right; margin-right: 10px;">
+            <el-row :xs="24" :sm="12" :lg="6" style="float: right; margin-right: 10px;">
               <el-button type="primary">搜索</el-button>
               <el-button>重置</el-button>
             </el-row>

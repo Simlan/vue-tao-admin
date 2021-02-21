@@ -41,54 +41,80 @@
 </script>
 
 <style lang="scss" scoped>
-.page-content {
-  width: 100%;
-  height: 100%;
+  .page-content {
+    width: 100%;
+    height: 100%;
 
-  .tips {
-    width: 630px;
-    margin: auto;
-    margin-top: 25vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    .tips {
+      width: 630px;
+      margin: auto;
+      margin-top: 25vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-    img {
-      width: 300px;
+      img {
+        width: 300px;
+      }
+
+      .right-wrap {
+
+        p {
+          color: #808695;
+          font-size: 20px;
+          line-height: 28px;
+        }
+
+        .el-button {
+          margin-top: 20px;
+        }
+      }
     }
 
-    .right-wrap {
+    .bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 30px;
+      margin: auto;
+      text-align: center;
 
-      p {
+      a {
         color: #808695;
-        font-size: 20px;
-        line-height: 28px;
-      }
+        font-size: 15px;
+        text-decoration: none;
+        margin-right: 30px;
 
-      .el-button {
-        margin-top: 20px;
-      }
-    }
-  }
-
-  .bottom {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 30px;
-    margin: auto;
-    text-align: center;
-
-    a {
-      color: #808695;
-      font-size: 15px;
-      text-decoration: none;
-      margin-right: 30px;
-
-      &:last-of-type {
-        margin-right: 0;
+        &:last-of-type {
+          margin-right: 0;
+        }
       }
     }
   }
-}
+
+  @media only screen and (max-width: $device-phone) { 
+    .page-content {
+
+      .tips {
+        width: 100%;
+        margin-top: 10vh;
+        display: block;
+
+        img {
+          width: 230px;
+          display: block;
+          margin: auto
+        }
+
+        .right-wrap {
+          text-align: center;
+
+          p {
+            font-size: 18px;
+            margin-top: 40px;
+          }
+        }
+      }
+    }
+  }
 </style>

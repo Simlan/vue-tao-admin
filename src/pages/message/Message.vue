@@ -1,10 +1,12 @@
 <template>
   <div class="page-content">
-    <el-row :gutter="20">
-      <el-col :span="4">
+    <el-row :gutter="15">
+      <el-col :xs="19" :sm="12" :lg="4">
         <el-input placeholder="搜索标题或者发送人"></el-input>
       </el-col>
-      <el-button>搜索</el-button>
+      <el-col :xs="4" :sm="12" :lg="4">
+        <el-button>搜索</el-button>
+      </el-col>
     </el-row>
 
     <tao-table :showPage="false" style="margin-top: 15px">

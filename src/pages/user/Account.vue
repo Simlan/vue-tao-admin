@@ -4,34 +4,34 @@
       <div slot="top">
         <el-form label-width="70px">
           <el-row :gutter="20">
-            <el-col :span="6">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="用户名：">
                 <el-input placeholder="用户名"></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="6">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="手机号：">
                 <el-input placeholder="手机号"></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="6">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="邮箱：">
                 <el-input placeholder="邮箱"></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="6">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="账号：">
                 <el-input placeholder="账号"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20">
-            <el-col :span="6">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="用户ID：">
                 <el-input placeholder="用户ID"></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="6">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="性别：">
                 <el-select v-model="value" clearable placeholder="请选择" style="width: 100%">
                   <el-option
@@ -43,13 +43,13 @@
                 </el-select>
               </el-form-item>
             </el-col>
-            <el-col :span="6">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="用户ID：">
                 <el-input placeholder="用户ID"></el-input>
               </el-form-item>
             </el-col>
             
-            <el-row :span="6" style="float: right; margin-right: 10px;">
+            <el-row :xs="24" :sm="12" :lg="6" style="float: right; margin-right: 10px;">
               <el-button type="primary">搜索</el-button>
               <el-button>重置</el-button>
             </el-row>

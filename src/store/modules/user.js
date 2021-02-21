@@ -34,6 +34,14 @@ const mutations = {
   setUserInfo(state, e) {
     state.user.info = e.user
     state.user.info.token = e.token
+
+    let sys = JSON.parse(localStorage.getItem("sys"))
+
+    if(sys) {
+      sys.user.info = e.user
+      sys.user.info.token = e.token
+      localStorage.setItem("sys",  JSON.stringify(sys))
+    }
   }
 }
 

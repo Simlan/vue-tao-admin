@@ -2,6 +2,9 @@
   <div class="topbar" :style="{width: topWidth}">
     <div class="menu">
       <div class="left" style="display: flex">
+        <svg class="svg-icon" aria-hidden="true">
+          <use xlink:href="#iconzhaopian-copy"></use>
+        </svg>
         <i class="iconfont" @click="visibleMenu" v-if="showMenuButton">&#xe6af;</i>
         <i class="iconfont" @click="reload()" v-if="showRefreshButton">&#xe760;</i>
         <breadcrumb v-if="showCrumbs"/>
@@ -201,6 +204,15 @@
       .left {
         line-height: 60px;
 
+        .svg-icon {
+          width: 25px;
+          vertical-align: -0.15em;
+          fill: currentColor;
+          overflow: hidden;
+          padding-left: 15px;
+          display: none;
+        }
+
         i {
           display: inline-block;
           width: 50px;
@@ -314,6 +326,28 @@
   @media only screen and (max-width: $device-ipad) { 
     .topbar {
       width: 100% !important;
+
+      .menu {
+        .left {
+          .svg-icon {
+            display: block;
+          }
+        }
+
+        .right {
+          .screen {
+            display: none;
+          }
+
+          .user {
+            padding-right: 0;
+
+            .name {
+              display: none;
+            }
+          }
+        }
+      }
     }
   }
 </style>
