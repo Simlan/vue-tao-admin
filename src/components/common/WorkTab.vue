@@ -54,10 +54,12 @@
       'worktab.current' (tab) {
         this.activeTab = tab.path
         let el = this.$refs[tab.path]
-        let offset = 0;
+        let elWidth = 0
+        let offsetLeft = 0
 
         if(el && el.length > 0) {
-          offset = el[0].offset
+          elWidth = el[0].clientWidth
+          offsetLeft = el[0].offsetLeft
         }
 
         // 进入控制台刷新页面
@@ -65,10 +67,10 @@
           this.reload()
         }
 
-        this.worktabAutoPosition(offset)
+        this.worktabAutoPosition(offsetLeft, elWidth)
       },
       'menu.menuList': {
-        handler(list) {
+        handler() {
           this.getCurrentUserAllowRouters()
         },
         immediate: true
@@ -206,27 +208,28 @@
             break;
         }
 
-        this.$store.dispatch('worktab/' +action, {path, router})
+        this.$store.dispatch('worktab/' + action, {path, router})
       },
-      // 工作台选项卡自动定位
-      worktabAutoPosition(offsetLeft) {
-        const scroll = this.$refs['scroll'];
-        const panel = scroll.scrollPanelElm;
-        const panelWidth = panel.clientWidth;
-        const scrollOfLeft = panel.scrollLeft;
-        let x = 0;
-        offsetLeft += 150;
-      
-        // 大于出可视区域
-        if(offsetLeft > panelWidth) {
-          x = offsetLeft;
-        }
+      /**
+       * 工作台选项卡自动定位
+       * 滚动逻辑：标签超出可视区域自动定位
+       */
+      worktabAutoPosition(offsetLeft, labelWidth) {
+        let x = scrollLeft
+        let labelRight = 6
+        const scroll = this.$refs['scroll']
+        const panel = scroll.scrollPanelElm
+        const panelWidth = panel.clientWidth
+        const scrollLeft = panel.scrollLeft
 
-        // 小于可视区域
-        if(offsetLeft < scrollOfLeft) {
-          x = offsetLeft - 150
-        }
+        offsetLeft += labelWidth + labelRight
 
+        if(offsetLeft > (panelWidth + scrollLeft)) {
+          x = offsetLeft - panelWidth
+        }
+        if((offsetLeft - labelWidth - labelRight) < scrollLeft) {
+          x = offsetLeft - labelWidth - labelRight
+        }
         scroll.scrollTo({x})
       }
     }
